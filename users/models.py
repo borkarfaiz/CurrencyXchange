@@ -1,12 +1,9 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
+from django.db import models
 
 
 class User(AbstractUser):
     """
     Default user for CurrencyXchange.
     """
-    pass
-    
+    profile_pic = models.FileField(null=True, upload_to="profile_pic/%Y/%m/%d")
