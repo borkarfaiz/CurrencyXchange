@@ -11,7 +11,7 @@ import model_utils.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0002_auto_20200728_1318'),
+        ('currency_converter', '0002_auto_20200728_1318'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('rates', django.contrib.postgres.fields.jsonb.JSONField()),
                 ('date', models.DateField(default=datetime.date.today)),
-                ('base', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='orders.Currency')),
+                ('base', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='currency_converter.Currency')),
             ],
             options={
                 'abstract': False,

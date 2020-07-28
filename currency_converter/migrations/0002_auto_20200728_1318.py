@@ -8,7 +8,7 @@ import model_utils.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0001_initial'),
+        ('currency_converter', '0001_initial'),
     ]
 
     operations = [

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ConversionAndTransferConfig(AppConfig):
-    name = 'orders'
+    name = 'currency_converter'
