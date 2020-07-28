@@ -1,14 +1,12 @@
 from datetime import datetime
-
-from django.db import models
 import uuid
 
-
-from model_utils.models import TimeStampedModel
-
 from django.contrib.auth import get_user_model
+from django.db import models
 
 from currency_converter.models import Currency
+
+from model_utils.models import TimeStampedModel
 
 UserModel = get_user_model()
 

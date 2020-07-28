@@ -1,14 +1,9 @@
+from datetime import date
 
-from datetime import date, datetime
-
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from model_utils.models import TimeStampedModel
-
-from django.contrib.auth import get_user_model
-from django.contrib.postgres.fields import JSONField
-
-UserModel = get_user_model()
 
 
 class Currency(TimeStampedModel):
