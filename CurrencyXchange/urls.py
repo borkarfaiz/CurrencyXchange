@@ -18,5 +18,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('CurrencyXchange.api_urls'))
+    path('api/', include('CurrencyXchange.api_urls')),
+    path('currencies/', include('currencies.urls')),
 ]
