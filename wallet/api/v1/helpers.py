@@ -9,6 +9,7 @@ from ...models import Balance, BalanceHistory, Wallet, Order, OrderType, OrderSt
 
 from .exceptions import InsufficientBalance
 
+
 def add_funds_to_account(user, amount, currency_code):
 	"""
 	add funds to the users wallet(balance)

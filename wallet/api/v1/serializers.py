@@ -2,21 +2,15 @@ from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
+from rest_framework.validators import UniqueValidator
 
-from ...models import Balance, Wallet, Currency
+from currency_converter.models import Currency
+
+from ...models import Balance, Wallet
 
 from .validators import validate_currency_code
 
 UserModel = get_user_model()
-
-
-class CurrencySerializer(serializers.ModelSerializer):
-	code = serializers.CharField(validators=[Currency.objects.filter(is_active=True)])
-
-	class Meta:
-		model = Currency
-		fields = ["code", "symbol"]
 
 
 class BalanceSerializer(serializers.ModelSerializer):
@@ -86,3 +80,19 @@ class FundsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Balance
 		fields = ["currency", "amount"]
+
+
+class FundsConversionSerializer(serializers.ModelSerializer):
+	from_currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	to_currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	amount = serializers.DecimalField(
+		max_digits=30, decimal_places=10,
+	)
+
+	class Meta:
+		model = Balance
+		fields = ["from_currency", "to_currency", "amount"]

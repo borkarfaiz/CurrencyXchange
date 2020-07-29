@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 
 from ...models import Balance, Wallet
 
-from .helper import add_funds_to_account, withdraw_funds_from_account
+from .helpers import add_funds_to_account, withdraw_funds_from_account
 from .serializers import BalanceSerializer, FundsSerializer, WalletSerializer
 
 
@@ -86,7 +86,8 @@ def add_funds(request):
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
-	return Response(status=HTTP_200_OK, data={"detail": "success"})
+	balance = Balance.objects.only('balance').get(wallet__user=user, currency__code=currency).balance
+	return Response(status=HTTP_200_OK, data={"balance": balance, "currency": currency})
 
 
 @api_view(["POST"])
@@ -106,7 +107,9 @@ def withdraw_funds(request):
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
-	return Response(status=HTTP_200_OK, data={"detail": "success"})
+	balance = Balance.objects.only('balance').get(wallet__user=user, currency__code=currency).balance
+	return Response(status=HTTP_200_OK, data={"balance": balance, "currency": currency})
+
 
 
 @api_view(["POST"])

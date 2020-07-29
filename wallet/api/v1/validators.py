@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ...models import Currency
+from currency_converter.models import Currency
 
 
 def validate_currency_code(value):
@@ -15,4 +15,3 @@ def validate_currency_code(value):
 	if not currency.is_active:
 		raise serializers.ValidationError("We don't support the currecncy as of now")
 	return value
-
