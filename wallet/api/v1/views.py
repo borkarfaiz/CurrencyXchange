@@ -125,7 +125,7 @@ def convert_currency(request):
 	amount = request_data.get("amount")
 	try:
 		convert_and_transfer_currency(
-			type=OrderCategory.SELF_FUND_TRANSFER, from_user=user,
+			category=OrderCategory.SELF_FUND_TRANSFER, from_user=user,
 			from_currency=from_currency, to_currency=to_currency, amount=amount,
 		)
 	except Exception as e:

@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from ...models import Currency, ConversionRate
 
-from .helpers import get_conversion_rate
+from .helpers import get_system_conversion_rates, get_live_conversion_rates
 from .serializers import ConversionRateSerializer
 
 
@@ -24,6 +24,18 @@ def conversion_rate(request):
 	if conversion_rate_serializer.is_valid():
 		base = data.get("base")
 		to = data.get("to")
-		conversion_rate_info = get_conversion_rate(base=base, to=to)
+		conversion_rate_info = get_system_conversion_rates(base=base, to=to)
+		return Response(status=HTTP_200_OK, data=conversion_rate_info)
+	return Response(status=HTTP_400_BAD_REQUEST, data=conversion_rate_serializer.errors)
+
+
+@api_view(["GET"])
+def live_rates(request):
+	data = request.query_params
+	conversion_rate_serializer = ConversionRateSerializer(data=data)
+	if conversion_rate_serializer.is_valid():
+		base = data.get("base")
+		to = data.get("to")
+		conversion_rate_info = get_live_conversion_rates(from_currency=base, to_currency=to)
 		return Response(status=HTTP_200_OK, data=conversion_rate_info)
 	return Response(status=HTTP_400_BAD_REQUEST, data=conversion_rate_serializer.errors)

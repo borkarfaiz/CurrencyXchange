@@ -72,6 +72,9 @@ REST_FRAMEWORK = {
 		"rest_framework.authentication.TokenAuthentication",
 	),
 	"DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+	'DEFAULT_PARSER_CLASSES': [
+		'rest_framework.parsers.JSONParser',
+	]
 }
 
 # MEDIA
@@ -149,7 +152,9 @@ USE_L10N = True
 
 STATIC_URL = '/static/'
 
-
 # Thirdparty API KEYS
 
 EXCHANGE_RATE = "https://api.exchangeratesapi.io/latest"
+
+CURRCONV_LIVE_RATE_API_URL = "https://free.currconv.com/api/v7/convert"
+CURRCONV_LIVE_RATE_API_KEY = "87e12e97dc3de632bebf"
