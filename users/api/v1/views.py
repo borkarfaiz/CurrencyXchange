@@ -1,10 +1,11 @@
 from django.http.response import FileResponse
 
-from rest_framework.decorators import api_view, parser_classes, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
-from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
+
 from .serializers import UserSerializer, ProfilePicSerializer
 
 

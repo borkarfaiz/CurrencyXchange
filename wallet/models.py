@@ -15,13 +15,18 @@ def default_currency():
 	return Currency.objects.get(code="INR")
 
 
+# album
 class Wallet(TimeStampedModel):
 	user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
 	preferred_currency = models.ForeignKey(
 		Currency, default=default_currency, on_delete=models.PROTECT, related_name="wallet_preferred_currency"
 	)
 
+	def __str__(self):
+		return self.user.username
 
+
+# track
 class Balance(TimeStampedModel):
 	wallet = models.ForeignKey(Wallet, on_delete=models.PROTECT, related_name="balance_wallet")
 	currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="balance_currency")
@@ -29,6 +34,9 @@ class Balance(TimeStampedModel):
 
 	class Meta:
 		unique_together = ["wallet", "currency"]
+
+	def __str__(self):
+		return "{} {}".format(self.wallet.user.username, self.currency.code)
 
 
 class OrderType(models.TextChoices):
@@ -51,7 +59,7 @@ class Order(TimeStampedModel):
 	system_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10)
 	actual_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10)
 	system_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
-	actual_transfer_amount =  models.DecimalField(max_digits=30, decimal_places=10)
+	actual_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
 	transfer_units = models.DecimalField(max_digits=30, decimal_places=10)
 	type = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.TRANSFER)
 	transaction_id = models.CharField(max_length=40, default=uuid.uuid4, unique=True)

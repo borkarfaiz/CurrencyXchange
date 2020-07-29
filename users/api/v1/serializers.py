@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
+from wallet.models import Wallet, Balance
+
 UserModel = get_user_model()
 
 
@@ -15,7 +17,10 @@ class UserSerializer(serializers.ModelSerializer):
 		)
 		user.set_password(password)
 		user.save()
-
+		wallet = Wallet.objects.create(user=user)
+		Balance.objects.create(
+			wallet=wallet, currency=wallet.preferred_currency
+		)
 		return user
 
 	class Meta:

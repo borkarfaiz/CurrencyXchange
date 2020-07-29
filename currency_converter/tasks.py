@@ -1,18 +1,10 @@
 from datetime import date
+import json
 
 from .models import ConversionRate
 from django.conf import settings
 
-import requests_async as requests
 import requests
-
-
-def update_coversion_rate_history():
-	"""
-	creates ConversionRateHistory
-	:return:
-	"""
-
 
 
 def update_conversion_rate():
@@ -22,14 +14,20 @@ def update_conversion_rate():
 	"""
 	conversion_rates_to_update = ConversionRate.objects.filter(
 		base__is_active=True
-	).select_related('base')
+	).select_related(
+		'base'
+	).order_by('base')
 	for conversion_rate_to_update in conversion_rates_to_update:
 		api_url = settings.EXCHANGE_RATE
-		response = requests.get(url=api_url, params={"base": conversion_rate_to_update.code})
+		code = conversion_rate_to_update.base.code
+		response = requests.get(url=api_url, params={"base": code})
 		if response.status_code != 200:
 			# NOTE should be email triggered or use sentry
+			print("conversion not update for currency {}".format(code))
 			continue
 		response_content = response.content
-		conversion_rate_to_update.rate = response_content
+		json_response = json.loads(response_content.decode("utf-8"))
+		rates = json_response.get("rates")
+		conversion_rate_to_update.rates = rates
 		conversion_rate_to_update.date = date.today()
 		conversion_rate_to_update.save()
