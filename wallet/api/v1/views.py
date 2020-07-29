@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 
 from ...models import Wallet
 
+
 from .serializers import WalletSerializer
 
 @api_view(["POST"])
@@ -38,7 +39,10 @@ class WalletAPI(APIView):
 		if not created
 		"""
 		user = request.user
-		wallet = Wallet.objects.filter(user=user).exists()
-		if wallet:
-			return Response(status=HTTP_409_CONFLICT, data={"detail": "wallet already created"})
-		
+		data = request.data
+		data.update({'user': user.id})
+		wallet_serializer = WalletSerializer(data=data)
+		if wallet_serializer.is_valid():
+			wallet_serializer.save()
+			return Response(status=HTTP_201_CREATED, data=wallet_serializer.data)
+		return Response(status=HTTP_200_OK, data=wallet_serializer.errors)

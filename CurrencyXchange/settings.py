@@ -39,11 +39,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-	"django_countries",
 	"django_extensions",
 	"rest_framework",
 	"rest_framework.authtoken",
-	"currencies",
 ]
 
 LOCAL_APPS = [
@@ -93,7 +91,6 @@ TEMPLATES = [
 				'django.template.context_processors.request',
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
-				'currencies.context_processors.currencies',
 			],
 		},
 	},
@@ -154,8 +151,5 @@ STATIC_URL = '/static/'
 
 
 # Thirdparty API KEYS
-# TODO put the API keys in Environment variables for production
-
-OPENEXCHANGERATES_APP_ID = "c2b2efcb306e075d9c2f2d0b614119ea"
 
 EXCHANGE_RATE = "https://api.exchangeratesapi.io/latest"

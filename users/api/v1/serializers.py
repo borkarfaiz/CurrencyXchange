@@ -17,10 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
 		)
 		user.set_password(password)
 		user.save()
-		wallet = Wallet.objects.create(user=user)
-		Balance.objects.create(
-			wallet=wallet, currency=wallet.preferred_currency
-		)
 		return user
 
 	class Meta:

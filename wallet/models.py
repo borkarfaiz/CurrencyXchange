@@ -15,7 +15,6 @@ def default_currency():
 	return Currency.objects.get(code="INR")
 
 
-# album
 class Wallet(TimeStampedModel):
 	user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
 	preferred_currency = models.ForeignKey(
@@ -26,7 +25,6 @@ class Wallet(TimeStampedModel):
 		return self.user.username
 
 
-# track
 class Balance(TimeStampedModel):
 	wallet = models.ForeignKey(Wallet, on_delete=models.PROTECT, related_name="balance_wallet")
 	currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="balance_currency")
