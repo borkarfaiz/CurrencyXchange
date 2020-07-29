@@ -6,9 +6,9 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 from rest_framework.views import APIView
 
-from ...models import Balance, Wallet
+from ...models import Balance, Wallet, OrderCategory
 
-from .helpers import add_funds_to_account, withdraw_funds_from_account
+from .helpers import add_funds_to_account, withdraw_funds_from_account, convert_and_transfer_currency
 from .serializers import BalanceSerializer, FundsSerializer, WalletSerializer, FundsConversionSerializer
 
 
@@ -82,7 +82,7 @@ def add_funds(request):
 	amount = request.data.get("amount")
 	currency = request.data.get("currency")
 	try:
-		add_funds_to_account(user, amount, currency)
+		add_funds_to_account(user=user, amount=amount, currency=currency)
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
@@ -103,7 +103,7 @@ def withdraw_funds(request):
 	amount = request_data.get("amount")
 	currency = request_data.get("currency")
 	try:
-		withdraw_funds_from_account(user, amount, currency)
+		withdraw_funds_from_account(user=user, amount=amount, currency=currency)
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
@@ -115,6 +115,7 @@ def withdraw_funds(request):
 def convert_currency(request):
 	# data
 	# from_currency, to_currency, amount
+	user = request.user
 	request_data = request.data
 	conversion_serializer = FundsConversionSerializer(data=request_data)
 	if not conversion_serializer.is_valid():
@@ -122,9 +123,13 @@ def convert_currency(request):
 	from_currency = request_data.get("from_currency")
 	to_currency = request_data.get("to_currency")
 	amount = request_data.get("amount")
-
-
-
+	try:
+		convert_and_transfer_currency(
+			type=OrderCategory.SELF_FUND_TRANSFER, from_user=user,
+			from_currency=from_currency, to_currency=to_currency, amount=amount,
+		)
+	except Exception as e:
+		pass
 	# create order transfer
 
 	## debit balance, create order, credit_balance

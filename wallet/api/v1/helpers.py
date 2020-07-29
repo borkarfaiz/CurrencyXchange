@@ -5,7 +5,7 @@ from django.db import transaction
 
 from currency_converter.models import Currency
 
-from ...models import Balance, BalanceHistory, Wallet, Order, OrderType, OrderStatus
+from ...models import Balance, BalanceHistory, Wallet, Order, OrderCategory, OrderStatus
 
 from .exceptions import InsufficientBalance
 
@@ -28,7 +28,7 @@ def add_funds_to_account(user, amount, currency_code):
 	initiated_order = create_order(
 		from_balance=balance, to_balance=balance, from_currency=currency, to_currency=currency,
 		system_transfer_amount=amount, actual_transfer_amount=amount, transfer_units=amount,
-		type=OrderType.ADD_FUNDS
+		type=OrderCategory.ADD_FUNDS
 	)
 	try:
 		with transaction.atomic():
@@ -46,7 +46,7 @@ def add_funds_to_account(user, amount, currency_code):
 		transaction.rollback()
 		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
-		raise transaction.TransactionManagementError("{} Failed".format(OrderType.ADD_FUNDS))
+		raise transaction.TransactionManagementError("{} Failed".format(OrderCategory.ADD_FUNDS))
 
 
 def withdraw_funds_from_account(user, amount, currency_code):
@@ -70,7 +70,7 @@ def withdraw_funds_from_account(user, amount, currency_code):
 	initiated_order = create_order(
 		from_balance=balance, to_balance=balance, from_currency=currency, to_currency=currency,
 		system_transfer_amount=amount, actual_transfer_amount=amount, transfer_units=amount,
-		type=OrderType.WITHDRAW_FUNDS
+		type=OrderCategory.WITHDRAW_FUNDS
 	)
 	try:
 		with transaction.atomic():
@@ -91,10 +91,12 @@ def withdraw_funds_from_account(user, amount, currency_code):
 		transaction.rollback()
 		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
-		raise transaction.TransactionManagementError("{} Failed".format(OrderType.WITHDRAW_FUNDS))
+		raise transaction.TransactionManagementError("{} Failed".format(OrderCategory.WITHDRAW_FUNDS))
 
 
-def currency_converter():
+def convert_and_transfer_currency(
+		type, from_user, from_currency, to_currency, amount,
+):
 	# from_user, to_user, from_currency, to_currency
 	# transfer_units, type,
 

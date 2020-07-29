@@ -37,7 +37,7 @@ class Balance(TimeStampedModel):
 		return "{} {}".format(self.wallet.user.username, self.currency.code)
 
 
-class OrderType(models.TextChoices):
+class OrderCategory(models.TextChoices):
 	FUND_TRANSFER = "FUND_TRANSFER"
 	SELF_FUND_TRANSFER = "SELF_FUND_TRANSFER"
 	ADD_FUNDS = "ADD_FUNDS"
@@ -60,7 +60,7 @@ class Order(TimeStampedModel):
 	system_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
 	actual_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
 	transfer_units = models.DecimalField(max_digits=30, decimal_places=10)
-	type = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.FUND_TRANSFER)
+	category = models.CharField(max_length=50, choices=OrderCategory.choices, default=OrderCategory.FUND_TRANSFER)
 	transaction_id = models.CharField(max_length=40, default=uuid.uuid4, unique=True, db_index=True)
 	transaction_datetime = models.DateTimeField(default=datetime.now)
 	status = models.CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.INITIATED)
