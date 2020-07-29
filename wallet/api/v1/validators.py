@@ -16,4 +16,3 @@ def validate_currency_code(value):
 		raise serializers.ValidationError("We don't support the currecncy as of now")
 	return value
 
-

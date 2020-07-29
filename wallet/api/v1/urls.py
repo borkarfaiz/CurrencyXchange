@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import add_funds, WalletAPI
+from .views import WalletAPI, BalanceAPI
 
 urlpatterns = [
 	#
-	path("add-funds", add_funds),
-	path("", WalletAPI.as_view())
+	path("", WalletAPI.as_view()),
+	path("balance", BalanceAPI.as_view()),
 	# path("withdraw-funds", withdraw_funds),
 	# path("transfer-funds", transfer_funds),
 	# path("convert-funds", convert_funds),

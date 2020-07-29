@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.db.utils import IntegrityError
 
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
+from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
 
 from ...models import Balance, Wallet, Currency
 
@@ -19,9 +20,30 @@ class CurrencySerializer(serializers.ModelSerializer):
 
 
 class BalanceSerializer(serializers.ModelSerializer):
+	currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	balance = serializers.DecimalField(
+		max_digits=30, decimal_places=10,
+		required=False
+	)
+	wallet = serializers.IntegerField(
+		write_only=True
+	)
+
 	class Meta:
 		model = Balance
-		fields = ["currency", "balance"]
+		fields = ["currency", "balance", "wallet"]
+
+	def create(self, validated_data):
+		currency_code = validated_data.get("currency")
+		currency = Currency.objects.get(**currency_code)
+		wallet = self.validated_data.get('wallet')
+		try:
+			balance = Balance.objects.create(currency=currency, wallet_id=wallet)
+		except IntegrityError:
+			raise IntegrityError("balance with currency {} already exist".format(currency.code))
+		return balance
 
 
 class WalletSerializer(serializers.ModelSerializer):
