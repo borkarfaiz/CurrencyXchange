@@ -28,7 +28,7 @@ class BalanceSerializer(serializers.ModelSerializer):
 		required=False
 	)
 	wallet = serializers.IntegerField(
-		write_only=True
+		write_only=True,
 	)
 
 	class Meta:
@@ -73,3 +73,16 @@ class WalletSerializer(serializers.ModelSerializer):
 			wallet = Wallet.objects.create(user_id=user_id)
 		balance = Balance.objects.get_or_create(wallet=wallet, currency=wallet.preferred_currency)
 		return wallet
+
+
+class FundsSerializer(serializers.ModelSerializer):
+	currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	amount = serializers.DecimalField(
+		max_digits=30, decimal_places=10,
+	)
+
+	class Meta:
+		model = Balance
+		fields = ["currency", "amount"]

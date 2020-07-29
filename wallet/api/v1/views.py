@@ -8,7 +8,8 @@ from rest_framework.views import APIView
 
 from ...models import Balance, Wallet
 
-from .serializers import BalanceSerializer, WalletSerializer
+from .helper import add_funds_to_account
+from .serializers import BalanceSerializer, FundsSerializer, WalletSerializer
 
 
 class WalletAPI(APIView):
@@ -67,3 +68,47 @@ class BalanceAPI(APIView):
 				return Response(status=HTTP_409_CONFLICT, data={"currency": [str(e)]})
 		return Response(status=HTTP_400_BAD_REQUEST, data=balance_serializer.errors)
 
+
+@api_view(["POST"])
+def add_funds(request):
+	# data
+	# amount and currency
+	user = request.user
+	data = request.data
+
+	# for validation of currency and amount
+	balance_serializer = FundsSerializer(data=data)
+	if not balance_serializer.is_valid():
+		return Response(status=HTTP_400_BAD_REQUEST, data=balance_serializer.errors)
+
+	amount = request.data.get("amount")
+	currency = request.data.get("currency")
+	try:
+		add_funds_to_account(user, amount, currency)
+	except Exception as e:
+		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
+
+	# order will be created
+	# balance history will be creted
+	return Response(status=HTTP_200_OK, data={"detail": "success"})
+	pass
+
+
+@api_view(["POST"])
+def withdraw_funds(request):
+	# data
+	# amount and currency - validations should be done
+	# order will be created
+	# balance history will be updated
+	pass
+
+
+@api_view(["POST"])
+def convert_currency(request):
+	# data
+	# from_currency, to_currency, amount
+	# if to_currency is not created, create
+	# create order transfer
+	## debit balance, create order, credit_balance
+	# balance history will be updated
+	pass

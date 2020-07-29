@@ -38,15 +38,16 @@ class Balance(TimeStampedModel):
 
 
 class OrderType(models.TextChoices):
-	TRANSFER = "FUND_TRANSFER"
-	SELF_TRANSFER = "SELF_TRANSFER"
-	ADD_MONEY = "ADD_FUNDS"
-	WITHDRAW_MONEY = "WITHDRAW_FUNDS"
+	FUND_TRANSFER = "FUND_TRANSFER"
+	SELF_FUND_TRANSFER = "SELF_FUND_TRANSFER"
+	ADD_FUNDS = "ADD_FUNDS"
+	WITHDRAW_FUNDS = "WITHDRAW_FUNDS"
 
 
 class OrderStatus(models.TextChoices):
 	FAILED = "FAILED"
 	COMPLETED = "COMPLETED"
+	INITIATED = "INITIATED"
 
 
 class Order(TimeStampedModel):
@@ -54,15 +55,15 @@ class Order(TimeStampedModel):
 	to_balance = models.ForeignKey(Balance, on_delete=models.PROTECT, related_name="order_to_balance")
 	from_currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="order_from_currency")
 	to_currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="order_to_currency")
-	system_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10)
-	actual_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10)
+	system_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10, default=1.0)
+	actual_transfer_rate = models.DecimalField(max_digits=20, decimal_places=10, default=1.0)
 	system_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
 	actual_transfer_amount = models.DecimalField(max_digits=30, decimal_places=10)
 	transfer_units = models.DecimalField(max_digits=30, decimal_places=10)
-	type = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.TRANSFER)
-	transaction_id = models.CharField(max_length=40, default=uuid.uuid4, unique=True)
+	type = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.FUND_TRANSFER)
+	transaction_id = models.CharField(max_length=40, default=uuid.uuid4, unique=True, db_index=True)
 	transaction_datetime = models.DateTimeField(default=datetime.now)
-	transaction_status = models.CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.COMPLETED)
+	transaction_status = models.CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.INITIATED)
 
 
 class BalanceHistory(TimeStampedModel):
@@ -70,6 +71,3 @@ class BalanceHistory(TimeStampedModel):
 	currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name="balance_history_currency")
 	balance = models.DecimalField(max_digits=30, decimal_places=10, default=0.0)
 	order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name="balance_history_order")
-
-	class Meta:
-		unique_together = ["wallet", "currency"]
