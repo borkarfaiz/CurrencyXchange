@@ -63,7 +63,7 @@ class Order(TimeStampedModel):
 	type = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.FUND_TRANSFER)
 	transaction_id = models.CharField(max_length=40, default=uuid.uuid4, unique=True, db_index=True)
 	transaction_datetime = models.DateTimeField(default=datetime.now)
-	transaction_status = models.CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.INITIATED)
+	status = models.CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.INITIATED)
 
 
 class BalanceHistory(TimeStampedModel):

@@ -44,7 +44,7 @@ def add_funds_to_account(user, amount, currency_code):
 
 	except Exception as e:
 		transaction.rollback()
-		initiated_order.transaction_status = OrderStatus.FAILED
+		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
 		raise transaction.TransactionManagementError("{} Failed".format(OrderType.ADD_FUNDS))
 
@@ -89,9 +89,18 @@ def withdraw_funds_from_account(user, amount, currency_code):
 		raise InsufficientBalance(str(e))
 	except Exception as e:
 		transaction.rollback()
-		initiated_order.transaction_status = OrderStatus.FAILED
+		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
 		raise transaction.TransactionManagementError("{} Failed".format(OrderType.WITHDRAW_FUNDS))
+
+
+def currency_converter():
+	# from_user, to_user, from_currency, to_currency
+	# transfer_units, type,
+
+	# system_transfer_amount, actual_transfer_amount
+	# system_transfer_rate, actual_transfer_rate
+	pass
 
 
 def create_order(
