@@ -962,7 +962,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"borkarfaiz\",\n    \"password\": \"faiz@faiz\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2432,6 +2432,116 @@
 							"body": "{\n    \"detail\": \"Insufficient Funds\"\n}"
 						}
 					]
+				},
+				{
+					"name": "transfer-funds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"to_username\": \"faiz\",\n    \"amount\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/transfer-funds",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"transfer-funds"
+							]
+						},
+						"description": "### This API can be use to convert the funds to other currencies.\n- It requires three parameters.\n    - from_currency, to_currency, amount"
+					},
+					"response": [
+						{
+							"name": "transfer-funds same user provided in to_username",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"to_username\": \"faiz\",\n    \"amount\": 2000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/transfer-funds",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"transfer-funds"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 30 Jul 2020 09:07:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, POST"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"to_username should be different then current user\"\n    ]\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2755,7 +2865,7 @@
 					},
 					"response": [
 						{
-							"name": "base to destination conversion",
+							"name": "live conversion for currency",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -2827,6 +2937,192 @@
 							],
 							"cookie": [],
 							"body": "0.013357"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "financial summarization",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/analytics/v1/financial-summarization?start_date=2020-07-28",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"analytics",
+								"v1",
+								"financial-summarization"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2020-07-28"
+								}
+							]
+						},
+						"description": "### This API is used to fetch the financial summarization.\n- currency, type, total_amount, number_of_transactions, avg_amount"
+					},
+					"response": [
+						{
+							"name": "financial summarization",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/analytics/v1/financial-summarization?start_date=2020-07-28",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"analytics",
+										"v1",
+										"financial-summarization"
+									],
+									"query": [
+										{
+											"key": "start_date",
+											"value": "2020-07-28"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 30 Jul 2020 15:39:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "222"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"loss\": [\n        {\n            \"currency\": \"USD\",\n            \"total_amount\": 3.43429268,\n            \"number_of_transaction\": 3,\n            \"avg_amount\": 1.1447642266666667\n        }\n    ],\n    \"profit\": [\n        {\n            \"currency\": \"INR\",\n            \"total_amount\": 209.52216384,\n            \"number_of_transaction\": 4,\n            \"avg_amount\": 52.38054096\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "average currency transfer on weekdays",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": [
+						{
+							"name": "average currency transfer on weekdays",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/analytics/v1/average-currency-transfer-on-weekdays",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"analytics",
+										"v1",
+										"average-currency-transfer-on-weekdays"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 30 Jul 2020 15:33:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "301"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Monday\": [],\n    \"Tuesday\": [],\n    \"Wednesday\": [],\n    \"Thursday\": [\n        {\n            \"currency\": \"INR\",\n            \"system_transfer_average\": 2471.709830893333,\n            \"cost_to_organization_transfer_average\": 2470.5650666666666\n        },\n        {\n            \"currency\": \"USD\",\n            \"system_transfer_average\": 119776.73465904,\n            \"cost_to_organization_transfer_average\": 119829.1152\n        }\n    ],\n    \"Friday\": []\n}"
 						}
 					]
 				}
