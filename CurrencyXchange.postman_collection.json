@@ -1,0 +1,2762 @@
+{
+	"info": {
+		"_postman_id": "fc33b9f5-4850-46d6-8edc-779a1ec2d85c",
+		"name": "CurrencyXchange",
+		"description": "## CurrencyXchange\n### This application provides the users the platform to exchange the currency\n**The app provides the following services through API's.**\n- Users can sign-up/login.\n- Users can upload profile_pic.\n- Users can add/withdraw funds to/from the account.\n- Users can convert the currency.\n- Users can transfer the currency. \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "External currency rates API",
+			"item": [
+				{
+					"name": "exchangerates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.exchangeratesapi.io/latest?base=USD",
+							"protocol": "https",
+							"host": [
+								"api",
+								"exchangeratesapi",
+								"io"
+							],
+							"path": [
+								"latest"
+							],
+							"query": [
+								{
+									"key": "base",
+									"value": "USD"
+								},
+								{
+									"key": "symbols",
+									"value": "USD,INR",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Will use this API for daily conversion rates as it is responsive."
+					},
+					"response": [
+						{
+							"name": "exchangerates for base",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.exchangeratesapi.io/latest?base=RON",
+									"protocol": "https",
+									"host": [
+										"api",
+										"exchangeratesapi",
+										"io"
+									],
+									"path": [
+										"latest"
+									],
+									"query": [
+										{
+											"key": "base",
+											"value": "RON"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jul 2020 08:31:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=1800"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "HIT"
+								},
+								{
+									"key": "cf-request-id",
+									"value": "043625d7010000e31ad3129200000001"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "5b9d3f380906e31a-CCU"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"rates\": {\n        \"CAD\": 0.3256319483,\n        \"HKD\": 1.8871291638,\n        \"ISK\": 32.792994224,\n        \"PHP\": 11.9696499182,\n        \"DKK\": 1.5410222968,\n        \"HUF\": 71.6125292425,\n        \"CZK\": 5.4226445562,\n        \"GBP\": 0.1890979856,\n        \"RON\": 1,\n        \"SEK\": 2.1257064779,\n        \"IDR\": 3535.084777343,\n        \"INR\": 18.1945220794,\n        \"BRL\": 1.2611846055,\n        \"RUB\": 17.4043434155,\n        \"HRK\": 1.5560731218,\n        \"JPY\": 25.6464401797,\n        \"THB\": 7.6703310353,\n        \"CHF\": 0.2243752976,\n        \"EUR\": 0.2070264787,\n        \"MYR\": 1.0353187173,\n        \"BGN\": 0.404902387,\n        \"TRY\": 1.6676396911,\n        \"CNY\": 1.7047388361,\n        \"NOK\": 2.2086205826,\n        \"NZD\": 0.3644701157,\n        \"ZAR\": 4.0034780448,\n        \"USD\": 0.2434631389,\n        \"MXN\": 5.3844067656,\n        \"SGD\": 0.3357141378,\n        \"AUD\": 0.3410140157,\n        \"ILS\": 0.8310663934,\n        \"KRW\": 291.3173094839,\n        \"PLN\": 0.9112477486\n    },\n    \"base\": \"RON\",\n    \"date\": \"2020-07-27\"\n}"
+						}
+					]
+				},
+				{
+					"name": "currconv",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://free.currconv.com/api/v7/convert?q=USD_INR&compact=ultra&apiKey=87e12e97dc3de632bebf",
+							"protocol": "https",
+							"host": [
+								"free",
+								"currconv",
+								"com"
+							],
+							"path": [
+								"api",
+								"v7",
+								"convert"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "USD_INR"
+								},
+								{
+									"key": "compact",
+									"value": "ultra"
+								},
+								{
+									"key": "apiKey",
+									"value": "87e12e97dc3de632bebf"
+								}
+							]
+						},
+						"description": "### This API will be used for fetching the live rates\n\n- we can hit 100 api per hour so be carefull.\n- or create multiple keys for now."
+					},
+					"response": [
+						{
+							"name": "live rates available countries list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://free.currconv.com/api/v7/currencies?apiKey=87e12e97dc3de632bebf",
+									"protocol": "https",
+									"host": [
+										"free",
+										"currconv",
+										"com"
+									],
+									"path": [
+										"api",
+										"v7",
+										"currencies"
+									],
+									"query": [
+										{
+											"key": "apiKey",
+											"value": "87e12e97dc3de632bebf"
+										},
+										{
+											"key": "base",
+											"value": "USD_INR",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jul 2020 08:39:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b07-cbr5jabXQ1CQDGD598eXkaDwj7Q\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "cf-request-id",
+									"value": "04362cd5120000e342ec9b8200000001"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "5b9d4a681d53e342-CCU"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"results\": {\n        \"ALL\": {\n            \"currencyName\": \"Albanian Lek\",\n            \"currencySymbol\": \"Lek\",\n            \"id\": \"ALL\"\n        },\n        \"XCD\": {\n            \"currencyName\": \"East Caribbean Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"XCD\"\n        },\n        \"EUR\": {\n            \"currencyName\": \"Euro\",\n            \"currencySymbol\": \"€\",\n            \"id\": \"EUR\"\n        },\n        \"BBD\": {\n            \"currencyName\": \"Barbadian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"BBD\"\n        },\n        \"BTN\": {\n            \"currencyName\": \"Bhutanese Ngultrum\",\n            \"id\": \"BTN\"\n        },\n        \"BND\": {\n            \"currencyName\": \"Brunei Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"BND\"\n        },\n        \"XAF\": {\n            \"currencyName\": \"Central African CFA Franc\",\n            \"id\": \"XAF\"\n        },\n        \"CUP\": {\n            \"currencyName\": \"Cuban Peso\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"CUP\"\n        },\n        \"USD\": {\n            \"currencyName\": \"United States Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"USD\"\n        },\n        \"FKP\": {\n            \"currencyName\": \"Falkland Islands Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"FKP\"\n        },\n        \"GIP\": {\n            \"currencyName\": \"Gibraltar Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"GIP\"\n        },\n        \"HUF\": {\n            \"currencyName\": \"Hungarian Forint\",\n            \"currencySymbol\": \"Ft\",\n            \"id\": \"HUF\"\n        },\n        \"IRR\": {\n            \"currencyName\": \"Iranian Rial\",\n            \"currencySymbol\": \"﷼\",\n            \"id\": \"IRR\"\n        },\n        \"JMD\": {\n            \"currencyName\": \"Jamaican Dollar\",\n            \"currencySymbol\": \"J$\",\n            \"id\": \"JMD\"\n        },\n        \"AUD\": {\n            \"currencyName\": \"Australian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"AUD\"\n        },\n        \"LAK\": {\n            \"currencyName\": \"Lao Kip\",\n            \"currencySymbol\": \"₭\",\n            \"id\": \"LAK\"\n        },\n        \"LYD\": {\n            \"currencyName\": \"Libyan Dinar\",\n            \"id\": \"LYD\"\n        },\n        \"MKD\": {\n            \"currencyName\": \"Macedonian Denar\",\n            \"currencySymbol\": \"ден\",\n            \"id\": \"MKD\"\n        },\n        \"XOF\": {\n            \"currencyName\": \"West African CFA Franc\",\n            \"id\": \"XOF\"\n        },\n        \"NZD\": {\n            \"currencyName\": \"New Zealand Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"NZD\"\n        },\n        \"OMR\": {\n            \"currencyName\": \"Omani Rial\",\n            \"currencySymbol\": \"﷼\",\n            \"id\": \"OMR\"\n        },\n        \"PGK\": {\n            \"currencyName\": \"Papua New Guinean Kina\",\n            \"id\": \"PGK\"\n        },\n        \"RWF\": {\n            \"currencyName\": \"Rwandan Franc\",\n            \"id\": \"RWF\"\n        },\n        \"WST\": {\n            \"currencyName\": \"Samoan Tala\",\n            \"id\": \"WST\"\n        },\n        \"RSD\": {\n            \"currencyName\": \"Serbian Dinar\",\n            \"currencySymbol\": \"Дин.\",\n            \"id\": \"RSD\"\n        },\n        \"SEK\": {\n            \"currencyName\": \"Swedish Krona\",\n            \"currencySymbol\": \"kr\",\n            \"id\": \"SEK\"\n        },\n        \"TZS\": {\n            \"currencyName\": \"Tanzanian Shilling\",\n            \"currencySymbol\": \"TSh\",\n            \"id\": \"TZS\"\n        },\n        \"AMD\": {\n            \"currencyName\": \"Armenian Dram\",\n            \"id\": \"AMD\"\n        },\n        \"BSD\": {\n            \"currencyName\": \"Bahamian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"BSD\"\n        },\n        \"BAM\": {\n            \"currencyName\": \"Bosnia And Herzegovina Konvertibilna Marka\",\n            \"currencySymbol\": \"KM\",\n            \"id\": \"BAM\"\n        },\n        \"CVE\": {\n            \"currencyName\": \"Cape Verdean Escudo\",\n            \"id\": \"CVE\"\n        },\n        \"CNY\": {\n            \"currencyName\": \"Chinese Yuan\",\n            \"currencySymbol\": \"¥\",\n            \"id\": \"CNY\"\n        },\n        \"CRC\": {\n            \"currencyName\": \"Costa Rican Colon\",\n            \"currencySymbol\": \"₡\",\n            \"id\": \"CRC\"\n        },\n        \"CZK\": {\n            \"currencyName\": \"Czech Koruna\",\n            \"currencySymbol\": \"Kč\",\n            \"id\": \"CZK\"\n        },\n        \"ERN\": {\n            \"currencyName\": \"Eritrean Nakfa\",\n            \"id\": \"ERN\"\n        },\n        \"GEL\": {\n            \"currencyName\": \"Georgian Lari\",\n            \"id\": \"GEL\"\n        },\n        \"HTG\": {\n            \"currencyName\": \"Haitian Gourde\",\n            \"id\": \"HTG\"\n        },\n        \"INR\": {\n            \"currencyName\": \"Indian Rupee\",\n            \"currencySymbol\": \"₹\",\n            \"id\": \"INR\"\n        },\n        \"JOD\": {\n            \"currencyName\": \"Jordanian Dinar\",\n            \"id\": \"JOD\"\n        },\n        \"KRW\": {\n            \"currencyName\": \"South Korean Won\",\n            \"currencySymbol\": \"₩\",\n            \"id\": \"KRW\"\n        },\n        \"LBP\": {\n            \"currencyName\": \"Lebanese Lira\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"LBP\"\n        },\n        \"MWK\": {\n            \"currencyName\": \"Malawian Kwacha\",\n            \"id\": \"MWK\"\n        },\n        \"MRO\": {\n            \"currencyName\": \"Mauritanian Ouguiya\",\n            \"id\": \"MRO\"\n        },\n        \"MZN\": {\n            \"currencyName\": \"Mozambican Metical\",\n            \"id\": \"MZN\"\n        },\n        \"ANG\": {\n            \"currencyName\": \"Netherlands Antillean Gulden\",\n            \"currencySymbol\": \"ƒ\",\n            \"id\": \"ANG\"\n        },\n        \"PEN\": {\n            \"currencyName\": \"Peruvian Nuevo Sol\",\n            \"currencySymbol\": \"S/.\",\n            \"id\": \"PEN\"\n        },\n        \"QAR\": {\n            \"currencyName\": \"Qatari Riyal\",\n            \"currencySymbol\": \"﷼\",\n            \"id\": \"QAR\"\n        },\n        \"STD\": {\n            \"currencyName\": \"Sao Tome And Principe Dobra\",\n            \"id\": \"STD\"\n        },\n        \"SLL\": {\n            \"currencyName\": \"Sierra Leonean Leone\",\n            \"id\": \"SLL\"\n        },\n        \"SOS\": {\n            \"currencyName\": \"Somali Shilling\",\n            \"currencySymbol\": \"S\",\n            \"id\": \"SOS\"\n        },\n        \"SDG\": {\n            \"currencyName\": \"Sudanese Pound\",\n            \"id\": \"SDG\"\n        },\n        \"SYP\": {\n            \"currencyName\": \"Syrian Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"SYP\"\n        },\n        \"AOA\": {\n            \"currencyName\": \"Angolan Kwanza\",\n            \"id\": \"AOA\"\n        },\n        \"AWG\": {\n            \"currencyName\": \"Aruban Florin\",\n            \"currencySymbol\": \"ƒ\",\n            \"id\": \"AWG\"\n        },\n        \"BHD\": {\n            \"currencyName\": \"Bahraini Dinar\",\n            \"id\": \"BHD\"\n        },\n        \"BZD\": {\n            \"currencyName\": \"Belize Dollar\",\n            \"currencySymbol\": \"BZ$\",\n            \"id\": \"BZD\"\n        },\n        \"BWP\": {\n            \"currencyName\": \"Botswana Pula\",\n            \"currencySymbol\": \"P\",\n            \"id\": \"BWP\"\n        },\n        \"BIF\": {\n            \"currencyName\": \"Burundi Franc\",\n            \"id\": \"BIF\"\n        },\n        \"KYD\": {\n            \"currencyName\": \"Cayman Islands Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"KYD\"\n        },\n        \"COP\": {\n            \"currencyName\": \"Colombian Peso\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"COP\"\n        },\n        \"DKK\": {\n            \"currencyName\": \"Danish Krone\",\n            \"currencySymbol\": \"kr\",\n            \"id\": \"DKK\"\n        },\n        \"GTQ\": {\n            \"currencyName\": \"Guatemalan Quetzal\",\n            \"currencySymbol\": \"Q\",\n            \"id\": \"GTQ\"\n        },\n        \"HNL\": {\n            \"currencyName\": \"Honduran Lempira\",\n            \"currencySymbol\": \"L\",\n            \"id\": \"HNL\"\n        },\n        \"IDR\": {\n            \"currencyName\": \"Indonesian Rupiah\",\n            \"currencySymbol\": \"Rp\",\n            \"id\": \"IDR\"\n        },\n        \"ILS\": {\n            \"currencyName\": \"Israeli New Sheqel\",\n            \"currencySymbol\": \"₪\",\n            \"id\": \"ILS\"\n        },\n        \"KZT\": {\n            \"currencyName\": \"Kazakhstani Tenge\",\n            \"currencySymbol\": \"лв\",\n            \"id\": \"KZT\"\n        },\n        \"KWD\": {\n            \"currencyName\": \"Kuwaiti Dinar\",\n            \"id\": \"KWD\"\n        },\n        \"LSL\": {\n            \"currencyName\": \"Lesotho Loti\",\n            \"id\": \"LSL\"\n        },\n        \"MYR\": {\n            \"currencyName\": \"Malaysian Ringgit\",\n            \"currencySymbol\": \"RM\",\n            \"id\": \"MYR\"\n        },\n        \"MUR\": {\n            \"currencyName\": \"Mauritian Rupee\",\n            \"currencySymbol\": \"₨\",\n            \"id\": \"MUR\"\n        },\n        \"MNT\": {\n            \"currencyName\": \"Mongolian Tugrik\",\n            \"currencySymbol\": \"₮\",\n            \"id\": \"MNT\"\n        },\n        \"MMK\": {\n            \"currencyName\": \"Myanma Kyat\",\n            \"id\": \"MMK\"\n        },\n        \"NGN\": {\n            \"currencyName\": \"Nigerian Naira\",\n            \"currencySymbol\": \"₦\",\n            \"id\": \"NGN\"\n        },\n        \"PAB\": {\n            \"currencyName\": \"Panamanian Balboa\",\n            \"currencySymbol\": \"B/.\",\n            \"id\": \"PAB\"\n        },\n        \"PHP\": {\n            \"currencyName\": \"Philippine Peso\",\n            \"currencySymbol\": \"₱\",\n            \"id\": \"PHP\"\n        },\n        \"RON\": {\n            \"currencyName\": \"Romanian Leu\",\n            \"currencySymbol\": \"lei\",\n            \"id\": \"RON\"\n        },\n        \"SAR\": {\n            \"currencyName\": \"Saudi Riyal\",\n            \"currencySymbol\": \"﷼\",\n            \"id\": \"SAR\"\n        },\n        \"SGD\": {\n            \"currencyName\": \"Singapore Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"SGD\"\n        },\n        \"ZAR\": {\n            \"currencyName\": \"South African Rand\",\n            \"currencySymbol\": \"R\",\n            \"id\": \"ZAR\"\n        },\n        \"SRD\": {\n            \"currencyName\": \"Surinamese Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"SRD\"\n        },\n        \"TWD\": {\n            \"currencyName\": \"New Taiwan Dollar\",\n            \"currencySymbol\": \"NT$\",\n            \"id\": \"TWD\"\n        },\n        \"TOP\": {\n            \"currencyName\": \"Paanga\",\n            \"id\": \"TOP\"\n        },\n        \"VEF\": {\n            \"currencyName\": \"Venezuelan Bolivar\",\n            \"id\": \"VEF\"\n        },\n        \"DZD\": {\n            \"currencyName\": \"Algerian Dinar\",\n            \"id\": \"DZD\"\n        },\n        \"ARS\": {\n            \"currencyName\": \"Argentine Peso\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"ARS\"\n        },\n        \"AZN\": {\n            \"currencyName\": \"Azerbaijani Manat\",\n            \"currencySymbol\": \"ман\",\n            \"id\": \"AZN\"\n        },\n        \"BYR\": {\n            \"currencyName\": \"Belarusian Ruble\",\n            \"currencySymbol\": \"p.\",\n            \"id\": \"BYR\"\n        },\n        \"BOB\": {\n            \"currencyName\": \"Bolivian Boliviano\",\n            \"currencySymbol\": \"$b\",\n            \"id\": \"BOB\"\n        },\n        \"BGN\": {\n            \"currencyName\": \"Bulgarian Lev\",\n            \"currencySymbol\": \"лв\",\n            \"id\": \"BGN\"\n        },\n        \"CAD\": {\n            \"currencyName\": \"Canadian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"CAD\"\n        },\n        \"CLP\": {\n            \"currencyName\": \"Chilean Peso\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"CLP\"\n        },\n        \"CDF\": {\n            \"currencyName\": \"Congolese Franc\",\n            \"id\": \"CDF\"\n        },\n        \"DOP\": {\n            \"currencyName\": \"Dominican Peso\",\n            \"currencySymbol\": \"RD$\",\n            \"id\": \"DOP\"\n        },\n        \"FJD\": {\n            \"currencyName\": \"Fijian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"FJD\"\n        },\n        \"GMD\": {\n            \"currencyName\": \"Gambian Dalasi\",\n            \"id\": \"GMD\"\n        },\n        \"GYD\": {\n            \"currencyName\": \"Guyanese Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"GYD\"\n        },\n        \"ISK\": {\n            \"currencyName\": \"Icelandic Króna\",\n            \"currencySymbol\": \"kr\",\n            \"id\": \"ISK\"\n        },\n        \"IQD\": {\n            \"currencyName\": \"Iraqi Dinar\",\n            \"id\": \"IQD\"\n        },\n        \"JPY\": {\n            \"currencyName\": \"Japanese Yen\",\n            \"currencySymbol\": \"¥\",\n            \"id\": \"JPY\"\n        },\n        \"KPW\": {\n            \"currencyName\": \"North Korean Won\",\n            \"currencySymbol\": \"₩\",\n            \"id\": \"KPW\"\n        },\n        \"LVL\": {\n            \"currencyName\": \"Latvian Lats\",\n            \"currencySymbol\": \"Ls\",\n            \"id\": \"LVL\"\n        },\n        \"CHF\": {\n            \"currencyName\": \"Swiss Franc\",\n            \"currencySymbol\": \"Fr.\",\n            \"id\": \"CHF\"\n        },\n        \"MGA\": {\n            \"currencyName\": \"Malagasy Ariary\",\n            \"id\": \"MGA\"\n        },\n        \"MDL\": {\n            \"currencyName\": \"Moldovan Leu\",\n            \"id\": \"MDL\"\n        },\n        \"MAD\": {\n            \"currencyName\": \"Moroccan Dirham\",\n            \"id\": \"MAD\"\n        },\n        \"NPR\": {\n            \"currencyName\": \"Nepalese Rupee\",\n            \"currencySymbol\": \"₨\",\n            \"id\": \"NPR\"\n        },\n        \"NIO\": {\n            \"currencyName\": \"Nicaraguan Cordoba\",\n            \"currencySymbol\": \"C$\",\n            \"id\": \"NIO\"\n        },\n        \"PKR\": {\n            \"currencyName\": \"Pakistani Rupee\",\n            \"currencySymbol\": \"₨\",\n            \"id\": \"PKR\"\n        },\n        \"PYG\": {\n            \"currencyName\": \"Paraguayan Guarani\",\n            \"currencySymbol\": \"Gs\",\n            \"id\": \"PYG\"\n        },\n        \"SHP\": {\n            \"currencyName\": \"Saint Helena Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"SHP\"\n        },\n        \"SCR\": {\n            \"currencyName\": \"Seychellois Rupee\",\n            \"currencySymbol\": \"₨\",\n            \"id\": \"SCR\"\n        },\n        \"SBD\": {\n            \"currencyName\": \"Solomon Islands Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"SBD\"\n        },\n        \"LKR\": {\n            \"currencyName\": \"Sri Lankan Rupee\",\n            \"currencySymbol\": \"₨\",\n            \"id\": \"LKR\"\n        },\n        \"THB\": {\n            \"currencyName\": \"Thai Baht\",\n            \"currencySymbol\": \"฿\",\n            \"id\": \"THB\"\n        },\n        \"TRY\": {\n            \"currencyName\": \"Turkish New Lira\",\n            \"id\": \"TRY\"\n        },\n        \"AED\": {\n            \"currencyName\": \"UAE Dirham\",\n            \"id\": \"AED\"\n        },\n        \"VUV\": {\n            \"currencyName\": \"Vanuatu Vatu\",\n            \"id\": \"VUV\"\n        },\n        \"YER\": {\n            \"currencyName\": \"Yemeni Rial\",\n            \"currencySymbol\": \"﷼\",\n            \"id\": \"YER\"\n        },\n        \"AFN\": {\n            \"currencyName\": \"Afghan Afghani\",\n            \"currencySymbol\": \"؋\",\n            \"id\": \"AFN\"\n        },\n        \"BDT\": {\n            \"currencyName\": \"Bangladeshi Taka\",\n            \"id\": \"BDT\"\n        },\n        \"BRL\": {\n            \"currencyName\": \"Brazilian Real\",\n            \"currencySymbol\": \"R$\",\n            \"id\": \"BRL\"\n        },\n        \"KHR\": {\n            \"currencyName\": \"Cambodian Riel\",\n            \"currencySymbol\": \"៛\",\n            \"id\": \"KHR\"\n        },\n        \"KMF\": {\n            \"currencyName\": \"Comorian Franc\",\n            \"id\": \"KMF\"\n        },\n        \"HRK\": {\n            \"currencyName\": \"Croatian Kuna\",\n            \"currencySymbol\": \"kn\",\n            \"id\": \"HRK\"\n        },\n        \"DJF\": {\n            \"currencyName\": \"Djiboutian Franc\",\n            \"id\": \"DJF\"\n        },\n        \"EGP\": {\n            \"currencyName\": \"Egyptian Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"EGP\"\n        },\n        \"ETB\": {\n            \"currencyName\": \"Ethiopian Birr\",\n            \"id\": \"ETB\"\n        },\n        \"XPF\": {\n            \"currencyName\": \"CFP Franc\",\n            \"id\": \"XPF\"\n        },\n        \"GHS\": {\n            \"currencyName\": \"Ghanaian Cedi\",\n            \"id\": \"GHS\"\n        },\n        \"GNF\": {\n            \"currencyName\": \"Guinean Franc\",\n            \"id\": \"GNF\"\n        },\n        \"HKD\": {\n            \"currencyName\": \"Hong Kong Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"HKD\"\n        },\n        \"XDR\": {\n            \"currencyName\": \"Special Drawing Rights\",\n            \"id\": \"XDR\"\n        },\n        \"KES\": {\n            \"currencyName\": \"Kenyan Shilling\",\n            \"currencySymbol\": \"KSh\",\n            \"id\": \"KES\"\n        },\n        \"KGS\": {\n            \"currencyName\": \"Kyrgyzstani Som\",\n            \"currencySymbol\": \"лв\",\n            \"id\": \"KGS\"\n        },\n        \"LRD\": {\n            \"currencyName\": \"Liberian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"LRD\"\n        },\n        \"MOP\": {\n            \"currencyName\": \"Macanese Pataca\",\n            \"id\": \"MOP\"\n        },\n        \"MVR\": {\n            \"currencyName\": \"Maldivian Rufiyaa\",\n            \"id\": \"MVR\"\n        },\n        \"MXN\": {\n            \"currencyName\": \"Mexican Peso\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"MXN\"\n        },\n        \"NAD\": {\n            \"currencyName\": \"Namibian Dollar\",\n            \"currencySymbol\": \"$\",\n            \"id\": \"NAD\"\n        },\n        \"NOK\": {\n            \"currencyName\": \"Norwegian Krone\",\n            \"currencySymbol\": \"kr\",\n            \"id\": \"NOK\"\n        },\n        \"PLN\": {\n            \"currencyName\": \"Polish Zloty\",\n            \"currencySymbol\": \"zł\",\n            \"id\": \"PLN\"\n        },\n        \"RUB\": {\n            \"currencyName\": \"Russian Ruble\",\n            \"currencySymbol\": \"руб\",\n            \"id\": \"RUB\"\n        },\n        \"SZL\": {\n            \"currencyName\": \"Swazi Lilangeni\",\n            \"id\": \"SZL\"\n        },\n        \"TJS\": {\n            \"currencyName\": \"Tajikistani Somoni\",\n            \"id\": \"TJS\"\n        },\n        \"TTD\": {\n            \"currencyName\": \"Trinidad and Tobago Dollar\",\n            \"currencySymbol\": \"TT$\",\n            \"id\": \"TTD\"\n        },\n        \"UGX\": {\n            \"currencyName\": \"Ugandan Shilling\",\n            \"currencySymbol\": \"USh\",\n            \"id\": \"UGX\"\n        },\n        \"UYU\": {\n            \"currencyName\": \"Uruguayan Peso\",\n            \"currencySymbol\": \"$U\",\n            \"id\": \"UYU\"\n        },\n        \"VND\": {\n            \"currencyName\": \"Vietnamese Dong\",\n            \"currencySymbol\": \"₫\",\n            \"id\": \"VND\"\n        },\n        \"TND\": {\n            \"currencyName\": \"Tunisian Dinar\",\n            \"id\": \"TND\"\n        },\n        \"UAH\": {\n            \"currencyName\": \"Ukrainian Hryvnia\",\n            \"currencySymbol\": \"₴\",\n            \"id\": \"UAH\"\n        },\n        \"UZS\": {\n            \"currencyName\": \"Uzbekistani Som\",\n            \"currencySymbol\": \"лв\",\n            \"id\": \"UZS\"\n        },\n        \"TMT\": {\n            \"currencyName\": \"Turkmenistan Manat\",\n            \"id\": \"TMT\"\n        },\n        \"GBP\": {\n            \"currencyName\": \"British Pound\",\n            \"currencySymbol\": \"£\",\n            \"id\": \"GBP\"\n        },\n        \"ZMW\": {\n            \"currencyName\": \"Zambian Kwacha\",\n            \"id\": \"ZMW\"\n        },\n        \"BTC\": {\n            \"currencyName\": \"Bitcoin\",\n            \"currencySymbol\": \"BTC\",\n            \"id\": \"BTC\"\n        },\n        \"BYN\": {\n            \"currencyName\": \"New Belarusian Ruble\",\n            \"currencySymbol\": \"p.\",\n            \"id\": \"BYN\"\n        },\n        \"BMD\": {\n            \"currencyName\": \"Bermudan Dollar\",\n            \"id\": \"BMD\"\n        },\n        \"GGP\": {\n            \"currencyName\": \"Guernsey Pound\",\n            \"id\": \"GGP\"\n        },\n        \"CLF\": {\n            \"currencyName\": \"Chilean Unit Of Account\",\n            \"id\": \"CLF\"\n        },\n        \"CUC\": {\n            \"currencyName\": \"Cuban Convertible Peso\",\n            \"id\": \"CUC\"\n        },\n        \"IMP\": {\n            \"currencyName\": \"Manx pound\",\n            \"id\": \"IMP\"\n        },\n        \"JEP\": {\n            \"currencyName\": \"Jersey Pound\",\n            \"id\": \"JEP\"\n        },\n        \"SVC\": {\n            \"currencyName\": \"Salvadoran Colón\",\n            \"id\": \"SVC\"\n        },\n        \"ZMK\": {\n            \"currencyName\": \"Old Zambian Kwacha\",\n            \"id\": \"ZMK\"\n        },\n        \"XAG\": {\n            \"currencyName\": \"Silver (troy ounce)\",\n            \"id\": \"XAG\"\n        },\n        \"ZWL\": {\n            \"currencyName\": \"Zimbabwean Dollar\",\n            \"id\": \"ZWL\"\n        }\n    }\n}"
+						},
+						{
+							"name": "currency coversion excample",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://free.currconv.com/api/v7/convert?apiKey=87e12e97dc3de632bebf&q=USD_INR",
+									"protocol": "https",
+									"host": [
+										"free",
+										"currconv",
+										"com"
+									],
+									"path": [
+										"api",
+										"v7",
+										"convert"
+									],
+									"query": [
+										{
+											"key": "apiKey",
+											"value": "87e12e97dc3de632bebf"
+										},
+										{
+											"key": "q",
+											"value": "USD_INR"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jul 2020 08:22:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"62-miWczudXuXYcxRvan+YKoVoPh+4\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "cf-request-id",
+									"value": "04361d1de50000e322ee159200000001"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "5b9d31430b1de322-CCU"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"query\": {\n        \"count\": 1\n    },\n    \"results\": {\n        \"USD_INR\": {\n            \"id\": \"USD_INR\",\n            \"val\": 74.857501,\n            \"to\": \"INR\",\n            \"fr\": \"USD\"\n        }\n    }\n}"
+						},
+						{
+							"name": "ultra compact conversion",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://free.currconv.com/api/v7/convert?q=USD_INR&compact=ultra&apiKey=87e12e97dc3de632bebf",
+									"protocol": "https",
+									"host": [
+										"free",
+										"currconv",
+										"com"
+									],
+									"path": [
+										"api",
+										"v7",
+										"convert"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "USD_INR"
+										},
+										{
+											"key": "compact",
+											"value": "ultra"
+										},
+										{
+											"key": "apiKey",
+											"value": "87e12e97dc3de632bebf"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jul 2020 08:47:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15-oXJBBb/2pSyiMjXdFaj0Yvo8C5Q\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "cf-request-id",
+									"value": "043634473f0000e3262a9c6200000001"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "5b9d5651fd56e326-CCU"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"USD_INR\": 74.857501\n}"
+						}
+					]
+				},
+				{
+					"name": "openrates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api.openrates.io/latest?base=USD",
+							"protocol": "http",
+							"host": [
+								"api",
+								"openrates",
+								"io"
+							],
+							"path": [
+								"latest"
+							],
+							"query": [
+								{
+									"key": "symbols",
+									"value": "USD,INR",
+									"disabled": true
+								},
+								{
+									"key": "base",
+									"value": "USD"
+								}
+							]
+						},
+						"description": "# Not using this API as observed it is that seomtime the api doesn't responds."
+					},
+					"response": [
+						{
+							"name": "openrates api for conversion",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://api.openrates.io/latest?symbols=USD,INR&base=USD",
+									"protocol": "http",
+									"host": [
+										"api",
+										"openrates",
+										"io"
+									],
+									"path": [
+										"latest"
+									],
+									"query": [
+										{
+											"key": "symbols",
+											"value": "USD,INR"
+										},
+										{
+											"key": "base",
+											"value": "USD"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 28 Jul 2020 08:19:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=1800"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "HIT"
+								},
+								{
+									"key": "cf-request-id",
+									"value": "04361a5d690000e34600a94200000001"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "5b9d2cdbd9ace346-CCU"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"rates\": {\n        \"INR\": 74.7321428571,\n        \"USD\": 1\n    },\n    \"base\": \"USD\",\n    \"date\": \"2020-07-27\"\n}"
+						}
+					]
+				},
+				{
+					"name": "fixer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://data.fixer.io/api/latest?access_key=3d32e9dbc8a56d80e5a788aa090f38d1&base=USD",
+							"protocol": "http",
+							"host": [
+								"data",
+								"fixer",
+								"io"
+							],
+							"path": [
+								"api",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "access_key",
+									"value": "3d32e9dbc8a56d80e5a788aa090f38d1"
+								},
+								{
+									"key": "base",
+									"value": "USD"
+								}
+							]
+						},
+						"description": "# Not Using This API as we don't have base currency feature.\n### This API will be used for updating the daily base rates for currency conversion."
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f2ad39b-9a0c-401f-84d0-6e32e09c92ec",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f254801-b67a-4ae5-8b24-a0e897b984e4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"faiz\",\n    \"password\": \"faiz@faiz\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user/v1/sign-up",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"v1",
+								"sign-up"
+							]
+						},
+						"description": "### User can use this API to register his self with the platform.\n- There are two mandatory fields.\n    - username and password.\n    - username should be unique.\n    - password should be of at least 8 characters.\n- There are other optional fields.\n    - email, first_name, last_name.\n"
+					},
+					"response": [
+						{
+							"name": "minimum password length check",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"rajamane\",\n    \"password\": \"ak@raja\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/sign-up",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:29:36 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"password\": [\n        \"Ensure this field has at least 8 characters.\"\n    ]\n}"
+						},
+						{
+							"name": "successfull sign_up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"akshayrajmane\",\n    \"password\": \"akshay@raj\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/sign-up",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:27:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 20,\n    \"username\": \"akshayrajmane\"\n}"
+						},
+						{
+							"name": "username exists issue",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"akshayrajmane\",\n    \"password\": \"akshay@raja\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/sign-up",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:28:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": [\n        \"A user with that username already exists.\"\n    ]\n}"
+						},
+						{
+							"name": "sign_up with optional field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"faizborkar\",\n    \"password\": \"ak@rajaaaa\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/sign-up",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"sign-up"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:38:29 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 22,\n    \"username\": \"faizborkar\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}"
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borkarfaiz\",\n    \"password\": \"faiz@faiz\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user/v1/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"v1",
+								"login"
+							]
+						},
+						"description": "### This API will be used to log in the user to the platform.\n- only two parameters are required.\n    - username and password.\n    - after successful authentication, it will return the token key to perform other actions."
+					},
+					"response": [
+						{
+							"name": "wrong credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borkarfaiz\",\n    \"password\": \"borakarfaiz1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/login",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:34:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Unable to log in with provided credentials.\"\n    ]\n}"
+						},
+						{
+							"name": "successfull login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borkarfaiz\",\n    \"password\": \"borakarfaiz\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/login",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:33:31 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"25557ae1f79462de8bc92289a3db05680a94b3fe\"\n}"
+						}
+					]
+				},
+				{
+					"name": "upload profile pic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Disposition",
+								"value": "attachment; filename=upload.jpg",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_pic",
+									"type": "file",
+									"src": "/home/faiz/Downloads/P2.jpg"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user/v1/profile-pic",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"v1",
+								"profile-pic"
+							]
+						},
+						"description": "### This API should be used to upload the profile pic of the user."
+					},
+					"response": [
+						{
+							"name": "profile pic uploaded success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Disposition",
+										"value": "attachment; filename=upload.jpg",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Token 25557ae1f79462de8bc92289a3db05680a94b3fe",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "profile_pic",
+											"type": "file",
+											"src": "/home/faiz/Downloads/P1.jpg"
+										}
+									],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/profile-pic",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"profile-pic"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 27 Jul 2020 10:42:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"upload successful\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get_profile_pic",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user/v1/profile-pic",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"v1",
+								"profile-pic"
+							]
+						},
+						"description": "### It fetches the profile pic of the user."
+					},
+					"response": [
+						{
+							"name": "profile pic fetch success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token 25557ae1f79462de8bc92289a3db05680a94b3fe"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/user/v1/profile-pic",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"v1",
+										"profile-pic"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "wallet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								""
+							]
+						},
+						"description": "### This API can be used to fetched the preferred_currency and balances in the wallet"
+					},
+					"response": [
+						{
+							"name": "wallet if balances are present",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:43:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"preferred_currency\": \"INR\",\n    \"balances\": [\n        {\n            \"currency\": \"INR\",\n            \"balance\": \"0.0000000000\"\n        },\n        {\n            \"currency\": \"USD\",\n            \"balance\": \"0.0000000000\"\n        },\n        {\n            \"currency\": \"AUD\",\n            \"balance\": \"0.0000000000\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "if wallet is not created",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:45:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"preferred_currency\": \"\",\n    \"balances\": [],\n    \"user\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "wallet create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								""
+							]
+						},
+						"description": "### This API will be used to create the wallet of a user.\n- if provided with preferred currency it will create the balance in the preferred currency.\n- else it will set default currency as \"INR\""
+					},
+					"response": [
+						{
+							"name": "wallet already exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:46:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": [\n        \"Wallet already exist.\"\n    ]\n}"
+						},
+						{
+							"name": "wallet created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:45:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"preferred_currency\": \"INR\",\n    \"balances\": [\n        {\n            \"currency\": \"INR\",\n            \"balance\": \"0.0000000000\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Balance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/balance",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "INR",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Fetches the balances of user"
+					},
+					"response": [
+						{
+							"name": "fetched balance",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/balance",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"balance"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "INR",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:46:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"currency\": \"INR\",\n        \"balance\": \"0.0000000000\"\n    },\n    {\n        \"currency\": \"USD\",\n        \"balance\": \"0.0000000000\"\n    },\n    {\n        \"currency\": \"AUD\",\n        \"balance\": \"0.0000000000\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Balance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency\": \"AFN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/balance",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"balance"
+							]
+						},
+						"description": "### This API will be used to create the wallet of a user.\n- if provided with preferred currency it will create the balance in the preferred currency.\n- else it will set default currency as \"INR\""
+					},
+					"response": [
+						{
+							"name": "Currency not active",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"AFN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/balance",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"balance"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:51:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currency\": [\n        \"We don't support the currecncy as of now\"\n    ]\n}"
+						},
+						{
+							"name": "Balance already created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"AUD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/balance",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"balance"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:48:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currency\": [\n        \"balance with currency AUD already exist\"\n    ]\n}"
+						},
+						{
+							"name": "Invalid Currency Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"SSD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/balance",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"balance"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:50:18 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currency\": [\n        \"Invalid currency\"\n    ]\n}"
+						},
+						{
+							"name": "Balance created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"AUD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/balance",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:48:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currency\": \"AUD\",\n    \"balance\": \"0.0000000000\"\n}"
+						}
+					]
+				},
+				{
+					"name": "add funds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/add-funds",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"add-funds"
+							]
+						},
+						"description": "### This API will be used adding the funds in the user wallet.\n- amount and currency should be provided.\n- if provided currency not present in the wallet then it will be created."
+					},
+					"response": [
+						{
+							"name": "add funds successfull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 5000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/add-funds",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"add-funds"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:52:20 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "20"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"success\"\n}"
+						}
+					]
+				},
+				{
+					"name": "withdraw funds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 2000\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/withdraw-funds",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"withdraw-funds"
+							]
+						},
+						"description": "### This API will be used withdrawing the funds in the user wallet.\n- amount and currency should be provided."
+					},
+					"response": [
+						{
+							"name": "Insuffiecient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"INR\",\n    \"amount\": 5000\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/withdraw-funds",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"withdraw-funds"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 12:25:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, POST"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Insufficient Funds\"\n}"
+						}
+					]
+				},
+				{
+					"name": "currency_conversion - fund conversion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"amount\": 2000\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/wallet/v1/convert-funds",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wallet",
+								"v1",
+								"convert-funds"
+							]
+						},
+						"description": "### This API can be use to convert the funds to other currencies.\n- It requires three parameters.\n    - from_currency, to_currency, amount"
+					},
+					"response": [
+						{
+							"name": "Insuffiecient funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Token {{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"INR\",\n    \"amount\": 5000\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/wallet/v1/withdraw-funds",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"wallet",
+										"v1",
+										"withdraw-funds"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 12:25:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, POST"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Insufficient Funds\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Currency-Converter",
+			"item": [
+				{
+					"name": "active_currencies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/currency-converter/v1/active-currencies",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"currency-converter",
+								"v1",
+								"active-currencies"
+							]
+						},
+						"description": "### This API fetches the active currencies from the system\n- as of now we don't provide the facilities for all the currencies.\n- this api will return the active currencies and symbols."
+					},
+					"response": [
+						{
+							"name": "active_currencies",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/currency_converter/v1/active_currencies",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"currency_converter",
+										"v1",
+										"active_currencies"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 11:42:31 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, GET"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "967"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"code\": \"AUD\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"BRL\",\n        \"symbol\": \"R$\"\n    },\n    {\n        \"code\": \"GBP\",\n        \"symbol\": \"£\"\n    },\n    {\n        \"code\": \"BGN\",\n        \"symbol\": \"лв\"\n    },\n    {\n        \"code\": \"CAD\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"CNY\",\n        \"symbol\": \"¥\"\n    },\n    {\n        \"code\": \"HRK\",\n        \"symbol\": \"kn\"\n    },\n    {\n        \"code\": \"CZK\",\n        \"symbol\": \"Kč\"\n    },\n    {\n        \"code\": \"DKK\",\n        \"symbol\": \"Kr.\"\n    },\n    {\n        \"code\": \"EUR\",\n        \"symbol\": \"€\"\n    },\n    {\n        \"code\": \"HKD\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"HUF\",\n        \"symbol\": \"Ft\"\n    },\n    {\n        \"code\": \"ISK\",\n        \"symbol\": \"kr\"\n    },\n    {\n        \"code\": \"INR\",\n        \"symbol\": \"₹\"\n    },\n    {\n        \"code\": \"IDR\",\n        \"symbol\": \"Rp\"\n    },\n    {\n        \"code\": \"ILS\",\n        \"symbol\": \"₪\"\n    },\n    {\n        \"code\": \"JPY\",\n        \"symbol\": \"¥\"\n    },\n    {\n        \"code\": \"MYR\",\n        \"symbol\": \"RM\"\n    },\n    {\n        \"code\": \"MXN\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"NZD\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"NOK\",\n        \"symbol\": \"kr\"\n    },\n    {\n        \"code\": \"PHP\",\n        \"symbol\": \"₱\"\n    },\n    {\n        \"code\": \"PLN\",\n        \"symbol\": \"zł\"\n    },\n    {\n        \"code\": \"RON\",\n        \"symbol\": \"lei\"\n    },\n    {\n        \"code\": \"RUB\",\n        \"symbol\": \"руб\"\n    },\n    {\n        \"code\": \"SGD\",\n        \"symbol\": \"$\"\n    },\n    {\n        \"code\": \"ZAR\",\n        \"symbol\": \"R\"\n    },\n    {\n        \"code\": \"KRW\",\n        \"symbol\": \"₩\"\n    },\n    {\n        \"code\": \"SEK\",\n        \"symbol\": \"kr\"\n    },\n    {\n        \"code\": \"CHF\",\n        \"symbol\": \"CHF\"\n    },\n    {\n        \"code\": \"THB\",\n        \"symbol\": \"฿\"\n    },\n    {\n        \"code\": \"TRY\",\n        \"symbol\": \"TL\"\n    },\n    {\n        \"code\": \"USD\",\n        \"symbol\": \"$\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "conversion_rate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/currency-converter/v1/conversion-rate?base=USD&to=INR",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"currency-converter",
+								"v1",
+								"conversion-rate"
+							],
+							"query": [
+								{
+									"key": "base",
+									"value": "USD"
+								},
+								{
+									"key": "to",
+									"value": "INR"
+								}
+							]
+						},
+						"description": "### This API fetches the active currencies from the system\n- as of now we don't provide the facilities for all the currencies.\n- this api will return the active currencies and symbols."
+					},
+					"response": [
+						{
+							"name": "conversion_rate if to provided",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/currency-converter/v1/conversion-rate?base=USD&to=INR",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"currency-converter",
+										"v1",
+										"conversion-rate"
+									],
+									"query": [
+										{
+											"key": "base",
+											"value": "USD"
+										},
+										{
+											"key": "to",
+											"value": "INR"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 14:06:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"base\": \"USD\",\n    \"to\": \"INR\",\n    \"rate\": 74.8604591619\n}"
+						},
+						{
+							"name": "conversion_rate for base only",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/currency-converter/v1/conversion-rate?base=USD",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"currency-converter",
+										"v1",
+										"conversion-rate"
+									],
+									"query": [
+										{
+											"key": "base",
+											"value": "USD"
+										},
+										{
+											"key": "to",
+											"value": "INR",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 14:06:06 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "660"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"base\": \"USD\",\n    \"rates\": {\n        \"AUD\": 1.4006998378,\n        \"BGN\": 1.6691986003,\n        \"BRL\": 5.1762396518,\n        \"CAD\": 1.3393360075,\n        \"CHF\": 0.9181531109,\n        \"CNY\": 7.0018776137,\n        \"CZK\": 22.4041990271,\n        \"DKK\": 6.3522232653,\n        \"EUR\": 0.8534607835,\n        \"GBP\": 0.7763762055,\n        \"HKD\": 7.7502773748,\n        \"HRK\": 6.4069301016,\n        \"HUF\": 296.1338226508,\n        \"IDR\": 14535.0004267304,\n        \"ILS\": 3.4156354016,\n        \"INR\": 74.8604591619,\n        \"ISK\": 135.3588802595,\n        \"JPY\": 105.2658530341,\n        \"KRW\": 1200.0768114705,\n        \"MXN\": 22.056669796,\n        \"MYR\": 4.2525390458,\n        \"NOK\": 9.1269096185,\n        \"NZD\": 1.5046513613,\n        \"PHP\": 49.2139626184,\n        \"PLN\": 3.7598361355,\n        \"RON\": 4.1269096185,\n        \"RUB\": 72.4087223692,\n        \"SEK\": 8.7752837757,\n        \"SGD\": 1.3798753947,\n        \"THB\": 31.509772126,\n        \"TRY\": 6.9371852863,\n        \"USD\": 1,\n        \"ZAR\": 16.5840232141\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "live_rates",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/currency-converter/v1/live-rates?base=USD&to=INR",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"currency-converter",
+								"v1",
+								"live-rates"
+							],
+							"query": [
+								{
+									"key": "base",
+									"value": "USD"
+								},
+								{
+									"key": "to",
+									"value": "INR"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,3 +1,4 @@
+from decimal import Decimal
 import json
 import requests
 
@@ -41,7 +42,7 @@ def get_system_conversion_rates(base, to=None, only_rate=False):
 	)
 	conversion_rate_info = {"base": base}
 	if to:
-		rate = conversion_rate_data.rates.get(to)
+		rate = Decimal(conversion_rate_data.rates.get(to))
 		# if only conversion rate integer value required
 		if only_rate:
 			return rate
@@ -75,6 +76,5 @@ def get_live_conversion_rates(from_currency, to_currency):
 		return None
 	response_content = response.content
 	json_response = json.loads(response_content.decode("utf-8"))
-	rate = json_response.get(q)
+	rate = Decimal(json_response.get(q))
 	return rate
-

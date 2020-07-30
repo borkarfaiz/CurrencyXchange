@@ -20,12 +20,3 @@ class ConversionRate(TimeStampedModel):
 
 	class Meta:
 		unique_together = ["base", "date"]
-
-
-class ConversionRateHistory(TimeStampedModel):
-	base = models.ForeignKey(Currency, on_delete=models.CASCADE, related_name="converion_rate_histroy_base")
-	rates = JSONField()
-	date = models.DateField(default=date.today)
-
-	class Meta:
-		unique_together = ["base", "date"]

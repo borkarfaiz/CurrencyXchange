@@ -7,6 +7,11 @@ from django.conf import settings
 import requests
 
 
+# @periodic_task(
+#     run_every = crontab(minute="00", hour="00"),
+#     name="update_portfolio",
+#     ignore_result=True
+# )
 def update_conversion_rate():
 	"""
 	updates the ConversionRate for transferring the money

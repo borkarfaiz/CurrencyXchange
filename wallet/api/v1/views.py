@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db.utils import IntegrityError
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -62,7 +64,7 @@ class BalanceAPI(APIView):
 		if balance_serializer.is_valid():
 			try:
 				balance_serializer.save()
-				return Response(status=HTTP_200_OK, data=balance_serializer.data)
+				return Response(status=HTTP_201_CREATED, data=balance_serializer.data)
 			# couldn't able to handle unique together constraint so handling it here
 			except IntegrityError as e:
 				return Response(status=HTTP_409_CONFLICT, data={"currency": [str(e)]})
@@ -87,7 +89,7 @@ def add_funds(request):
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
 	balance = Balance.objects.only('balance').get(wallet__user=user, currency__code=currency).balance
-	return Response(status=HTTP_200_OK, data={"balance": balance, "currency": currency})
+	return Response(status=HTTP_201_CREATED, data={"balance": balance, "currency": currency})
 
 
 @api_view(["POST"])
@@ -108,7 +110,7 @@ def withdraw_funds(request):
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
 	balance = Balance.objects.only('balance').get(wallet__user=user, currency__code=currency).balance
-	return Response(status=HTTP_200_OK, data={"balance": balance, "currency": currency})
+	return Response(status=HTTP_201_CREATED, data={"balance": balance, "currency": currency})
 
 
 @api_view(["POST"])
@@ -122,16 +124,17 @@ def convert_currency(request):
 		return Response(status=HTTP_400_BAD_REQUEST, data=conversion_serializer.data)
 	from_currency = request_data.get("from_currency")
 	to_currency = request_data.get("to_currency")
-	amount = request_data.get("amount")
+	amount = Decimal(request_data.get("amount"))
 	try:
 		convert_and_transfer_currency(
 			category=OrderCategory.SELF_FUND_TRANSFER, from_user=user,
-			from_currency=from_currency, to_currency=to_currency, amount=amount,
+			from_currency_code=from_currency, to_currency_code=to_currency, amount=amount,
 		)
 	except Exception as e:
-		pass
-	# create order transfer
+		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
-	## debit balance, create order, credit_balance
-	# balance history will be updated
-	pass
+	balances = Balance.objects.filter(
+		currency__code__in=[from_currency, to_currency], wallet__user=user
+	).values("currency", "balance")
+
+	return Response(status=HTTP_201_CREATED, data=balances)
