@@ -7,7 +7,7 @@ from ...models import ConversionRate
 
 class ConversionRateSerializer(serializers.ModelSerializer):
 	base = serializers.CharField(validators=[validate_currency_code])
-	to = serializers.CharField(validators=[validate_currency_code], required=False)
+	to = serializers.CharField(validators=[validate_currency_code])
 
 	class Meta:
 		model = ConversionRate

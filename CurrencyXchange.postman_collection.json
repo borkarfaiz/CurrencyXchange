@@ -663,7 +663,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"faiz\",\n    \"password\": \"faiz@faiz\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}",
+							"raw": "{\n    \"username\": \"faizan03\",\n    \"password\": \"faiz@faiz\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -817,7 +817,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 20,\n    \"username\": \"akshayrajmane\"\n}"
+							"body": "{\n    \"username\": \"akshayrajmane\"\n}"
 						},
 						{
 							"name": "username exists issue",
@@ -951,7 +951,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"id\": 22,\n    \"username\": \"faizborkar\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}"
+							"body": "{\n    \"username\": \"faizborkar\",\n    \"email\": \"borkarfaiz@gmail.com\",\n    \"first_name\": \"faiz\",\n    \"last_name\": \"borkar\"\n}"
 						}
 					]
 				},
@@ -1806,7 +1806,7 @@
 								"balance"
 							]
 						},
-						"description": "### This API will be used to create the wallet of a user.\n- if provided with preferred currency it will create the balance in the preferred currency.\n- else it will set default currency as \"INR\""
+						"description": "### This API will be used to create the create the balance under wallet of a user.\n- valid currency is required"
 					},
 					"response": [
 						{
@@ -2750,9 +2750,85 @@
 									"value": "INR"
 								}
 							]
-						}
+						},
+						"description": "# This API fetches the live rates of the currency."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "base to destination conversion",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/currency-converter/v1/live-rates?base=USD&to=INR",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"currency-converter",
+										"v1",
+										"live-rates"
+									],
+									"query": [
+										{
+											"key": "base",
+											"value": "USD"
+										},
+										{
+											"key": "to",
+											"value": "INR"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 29 Jul 2020 18:13:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.8.2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "8"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								}
+							],
+							"cookie": [],
+							"body": "0.013357"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
