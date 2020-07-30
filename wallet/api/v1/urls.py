@@ -9,7 +9,4 @@ urlpatterns = [
 	path("withdraw-funds", withdraw_funds),
 	path("convert-funds", convert_currency),
 	path("transfer-funds", transfer_funds)
-	# path("withdraw-funds", withdraw_funds),
-	# path("transfer-funds", transfer_funds),
-	# path("convert-funds", convert_funds),
 ]
