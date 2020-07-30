@@ -84,7 +84,7 @@ def add_funds(request):
 	amount = request.data.get("amount")
 	currency = request.data.get("currency")
 	try:
-		add_funds_to_account(user=user, amount=amount, currency=currency)
+		add_funds_to_account(user=user, amount=amount, currency_code=currency)
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 
@@ -105,7 +105,7 @@ def withdraw_funds(request):
 	amount = request_data.get("amount")
 	currency = request_data.get("currency")
 	try:
-		withdraw_funds_from_account(user=user, amount=amount, currency=currency)
+		withdraw_funds_from_account(user=user, amount=amount, currency_code=currency)
 	except Exception as e:
 		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
 

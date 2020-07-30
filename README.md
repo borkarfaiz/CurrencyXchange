@@ -31,6 +31,9 @@ CurrencyXchange is a platform where you can exchange and transfer currencies all
 ## Project Setup On Linux
 ### Python Setup
 - Install Python 3.8.
+```bash
+sudo apt install python3.8
+```
 
 ### Postgres Setup
 - Install Postgresql.
@@ -58,17 +61,18 @@ create database currencyxchange;
 - go to the directory where you want to fetch the code.
     - **NOTE** user won't be able to fetch this repository as it is private.
 ```bash
-git pull https://github.com/borkarfaiz/CurrencyXchange
+git clone https://github.com/borkarfaiz/CurrencyXchange
 ```
 
 ### VirtaulEnv Creation and Dependencies Installation
 
 - Install VirtualEnv.
 ```bash
-sudo pip install virtualenvwrapper
+sudo pip3 install virtualenvwrapper
 ```
 - Add lines to .bashrc or .bashprofile
 ```bash
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 source /usr/local/bin/virtualenvwrapper.sh
@@ -94,7 +98,7 @@ python manage.py migrate
 ```
 - open shell for python.
 ```bash
-python manage.py shell_plus
+python manage.py shell_plus --ipython
 ```
 - generate data set.
 ```python
@@ -120,3 +124,6 @@ ConversionRate.objects.bulk_create(currencies)
 from currency_converter.tasks import update_conversion_rate
 update_conversion_rate()
 ```
+## Note:
+**The services are only available for the currencies as listed below.**  
+- **AUD, BRL, GBP, BGN, CAD, CNY, RK, CZK, DKK, EUR, HKD, HUF, ISK, INR, IDR, ILS, JPY, MYR, MXN, NZD, NOK, PHP, PLN, RON, RUB, SGD, ZAR, KRW, SEK, CHF, THB, TRY, USD.**
