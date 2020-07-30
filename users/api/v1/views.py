@@ -15,8 +15,10 @@ def sign_up(request):
 	user_serializer = UserSerializer(data=request.data)
 	if user_serializer.is_valid():
 		user_serializer.save()
+		# to remove empty keys
+		data = {k: v for k, v in user_serializer.data.items() if v}
 		return Response(
-			status=HTTP_201_CREATED, data=user_serializer.data,
+			status=HTTP_201_CREATED, data=data,
 		)
 	else:
 		return Response(
