@@ -124,6 +124,19 @@ ConversionRate.objects.bulk_create(currencies)
 from currency_converter.tasks import update_conversion_rate
 update_conversion_rate()
 ```
+
+### Testing
+- Running Pytest
+    - pytest will give you detailed result in well formatted way.
+```bash
+pytest
+```
+- Running test from manage.py
+```bash
+python manage.py test
+```
+
+
 ## Note:
 **The services are only available for the currencies as listed below.**  
 - **AUD, BRL, GBP, BGN, CAD, CNY, RK, CZK, DKK, EUR, HKD, HUF, ISK, INR, IDR, ILS, JPY, MYR, MXN, NZD, NOK, PHP, PLN, RON, RUB, SGD, ZAR, KRW, SEK, CHF, THB, TRY, USD.**

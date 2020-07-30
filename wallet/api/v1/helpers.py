@@ -219,6 +219,7 @@ def convert_and_transfer_currency(
 			from_balance.save()
 			to_balance.save()
 			initiated_order.status = OrderStatus.COMPLETED
+			initiated_order.save()
 			BalanceHistory.objects.create(
 				order=initiated_order, wallet=from_wallet, balance=from_balance.balance, currency=from_currency,
 			)
