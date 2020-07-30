@@ -8,7 +8,7 @@ from currency_converter.models import Currency
 
 from ...models import Balance, Wallet
 
-from .validators import validate_currency_code
+from .validators import user_exist_check, UniqueFieldsValidator, validate_currency_code
 
 UserModel = get_user_model()
 
@@ -96,3 +96,27 @@ class FundsConversionSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Balance
 		fields = ["from_currency", "to_currency", "amount"]
+
+
+class FundsTransferSerializer(serializers.ModelSerializer):
+	from_currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	to_currency = serializers.CharField(
+		source="currency.code", validators=[validate_currency_code],
+	)
+	from_username = serializers.CharField()
+	to_username = serializers.CharField(validators=[user_exist_check])
+	amount = serializers.DecimalField(
+		max_digits=30, decimal_places=10,
+	)
+
+	class Meta:
+		model = Balance
+		fields = ["from_currency", "to_currency", "amount", "from_username", "to_username"]
+		validators = [
+			UniqueFieldsValidator(
+				fields=['from_username', 'to_username'],
+				message="to_username should be different then current user"
+			)
+		]

@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.db.utils import IntegrityError
+from django.contrib.auth import get_user_model
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
@@ -11,7 +12,10 @@ from rest_framework.views import APIView
 from ...models import Balance, Wallet, OrderCategory
 
 from .helpers import add_funds_to_account, withdraw_funds_from_account, convert_and_transfer_currency
-from .serializers import BalanceSerializer, FundsSerializer, WalletSerializer, FundsConversionSerializer
+from .serializers import BalanceSerializer, FundsSerializer, FundsConversionSerializer, FundsTransferSerializer, \
+	WalletSerializer
+
+UserModel = get_user_model()
 
 
 class WalletAPI(APIView):
@@ -73,6 +77,9 @@ class BalanceAPI(APIView):
 
 @api_view(["POST"])
 def add_funds(request):
+	"""
+	add funds to user wallet
+	"""
 	user = request.user
 	data = request.data
 
@@ -94,6 +101,9 @@ def add_funds(request):
 
 @api_view(["POST"])
 def withdraw_funds(request):
+	"""
+	withdraw funds from the users wallet
+	"""
 	user = request.user
 	request_data = request.data
 
@@ -115,13 +125,14 @@ def withdraw_funds(request):
 
 @api_view(["POST"])
 def convert_currency(request):
-	# data
-	# from_currency, to_currency, amount
+	"""
+	convert funds of the user
+	"""
 	user = request.user
 	request_data = request.data
 	conversion_serializer = FundsConversionSerializer(data=request_data)
 	if not conversion_serializer.is_valid():
-		return Response(status=HTTP_400_BAD_REQUEST, data=conversion_serializer.data)
+		return Response(status=HTTP_400_BAD_REQUEST, data=conversion_serializer.errors)
 	from_currency = request_data.get("from_currency")
 	to_currency = request_data.get("to_currency")
 	amount = Decimal(request_data.get("amount"))
@@ -138,3 +149,33 @@ def convert_currency(request):
 	).values("currency", "balance")
 
 	return Response(status=HTTP_201_CREATED, data=balances)
+
+
+@api_view(["POST"])
+def transfer_funds(request):
+	"""
+	transfer the fund from one account to other account
+	"""
+	# from_currency, to_currency, to_username, transfer_units
+	user = request.user
+	request_data = request.data
+	request_data.update({"from_username": user.username})
+	fund_transfer_serializer = FundsTransferSerializer(data=request_data)
+	if not fund_transfer_serializer.is_valid():
+		return Response(status=HTTP_400_BAD_REQUEST, data=fund_transfer_serializer.errors)
+	from_currency = request_data.get("from_currency")
+	to_currency = request_data.get("to_currency")
+	amount = Decimal(request_data.get("amount"))
+	to_username = request_data.get("to_username")
+	from_user = request.user
+	to_user = UserModel.objects.get(username=to_username)
+	try:
+		order = convert_and_transfer_currency(
+			category=OrderCategory.FUND_TRANSFER, from_user=from_user, to_user=to_user,
+			from_currency_code=from_currency, to_currency_code=to_currency,
+			amount=amount
+		)
+	except Exception as e:
+		return Response(status=HTTP_400_BAD_REQUEST, data={"detail": str(e)})
+	data = {"transfered_amount": order.system_transfer_amount}
+	return Response(status=HTTP_201_CREATED, data=data)

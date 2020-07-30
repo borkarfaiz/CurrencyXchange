@@ -157,7 +157,7 @@ def get_system_transfer_amount_and_rate(from_currency_code, to_currency_code, tr
 	:return: system_transfer_rate, system_transfer_rate
 	"""
 	system_transfer_rate = get_system_conversion_rates(base=from_currency_code, to=to_currency_code, only_rate=True)
-	system_transfer_amount = transfer_units *  system_transfer_rate
+	system_transfer_amount = transfer_units * system_transfer_rate
 	return system_transfer_amount, system_transfer_rate
 
 
@@ -194,13 +194,17 @@ def convert_and_transfer_currency(
 	from_balance, created = Balance.objects.get_or_create(wallet=from_wallet, currency=from_currency)
 	to_balance, created = Balance.objects.get_or_create(wallet=to_wallet, currency=to_currency)
 
-	system_transfer_amount, system_transfer_rate = get_system_transfer_amount_and_rate(
-		from_currency_code, to_currency_code, amount
-	)
-
-	actual_transfer_amount, actual_transfer_rate = get_live_transfer_amount_and_rate(
-		from_currency_code, to_currency_code, amount
-	)
+	if from_currency != to_currency:
+		system_transfer_amount, system_transfer_rate = get_system_transfer_amount_and_rate(
+			from_currency_code, to_currency_code, amount
+		)
+		actual_transfer_amount, actual_transfer_rate = get_live_transfer_amount_and_rate(
+			from_currency_code, to_currency_code, amount
+		)
+	# if sending and receiving currency is same we don't need to convert the currency
+	else:
+		system_transfer_rate = actual_transfer_rate = Decimal(1)
+		system_transfer_amount = actual_transfer_amount = amount
 
 	initiated_order = create_order(
 		from_balance=from_balance, to_balance=to_balance, from_currency=from_currency, to_currency=to_currency,
@@ -226,6 +230,7 @@ def convert_and_transfer_currency(
 			BalanceHistory.objects.create(
 				order=initiated_order, wallet=to_wallet, balance=to_balance.balance, currency=to_currency,
 			)
+			return initiated_order
 	except InsufficientBalance as e:
 		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
