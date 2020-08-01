@@ -4,12 +4,12 @@ from decimal import Decimal
 from django.db.utils import IntegrityError
 from django.db import transaction
 
-from currency_converter.api.v1.helpers import get_system_conversion_rates, get_live_conversion_rates
+from currency_converter.helpers import get_system_conversion_rates, get_live_conversion_rates
 from currency_converter.models import Currency
 
-from ...models import Balance, BalanceHistory, Wallet, Order, OrderCategory, OrderStatus
-
 from .exceptions import InsufficientBalance
+from .models import Balance, BalanceHistory, Wallet, Order, OrderCategory, OrderStatus
+from .utils import send_order_receipt
 
 
 def create_order(
@@ -230,6 +230,7 @@ def convert_and_transfer_currency(
 			BalanceHistory.objects.create(
 				order=initiated_order, wallet=to_wallet, balance=to_balance.balance, currency=to_currency,
 			)
+			send_order_receipt(initiated_order)
 			return initiated_order
 	except InsufficientBalance as e:
 		initiated_order.status = OrderStatus.FAILED

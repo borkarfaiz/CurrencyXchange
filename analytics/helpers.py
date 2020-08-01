@@ -1,7 +1,6 @@
 from datetime import date
 from decimal import Decimal
 
-from django.contrib.postgres.fields import JSONField
 from django.db.models.aggregates import Avg, Count, Sum
 from django.db.models.expressions import F, Case, When, Value as V
 from django.db.models.fields import CharField
@@ -66,7 +65,7 @@ def get_financial_summarization(start_date=None):
 
 def get_average_currency_transfer_on_weekdays():
 	"""
-	summarrize the average transfer currencies on weekdays
+	summarize the average transfer currencies on weekdays
 	:return: week_day, currency, system_transfer_average, cost_to_organization_transfer_average
 	"""
 	average_currency_transfer_on_weekdays = Order.objects.filter(

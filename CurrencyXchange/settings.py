@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from os import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +26,18 @@ SECRET_KEY = 'dwygmnpphg4#7svzbtbqtdn7safxk$yb&=f%+e4u$)yuptl6hv'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+
+# Mail settings
+# ------------------------------------------------------------------------------
+
+EMAIL_PORT = 587
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = environ.get("EMAIL_ID")
+EMAIL_HOST_PASSWORD = environ.get("EMAIL_PASSWORD")
 
 # APPS
 # ------------------------------------------------------------------------------

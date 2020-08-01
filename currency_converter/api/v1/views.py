@@ -1,11 +1,10 @@
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
-from rest_framework.views import APIView
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
-from ...models import Currency, ConversionRate
+from ...models import Currency
 
-from .helpers import get_system_conversion_rates, get_live_conversion_rates
+from currency_converter.helpers import get_system_conversion_rates, get_live_conversion_rates
 from .serializers import ConversionRateSerializer
 
 

@@ -4,7 +4,7 @@ import requests
 
 from django.conf import settings
 
-from ...models import ConversionRate
+from .models import ConversionRate
 
 
 def get_system_conversion_rates(base, to=None, only_rate=False):
@@ -63,7 +63,7 @@ def get_live_conversion_rates(from_currency, to_currency):
 	:param to_currency:  to which currency should be converted
 	:return: rate as float value
 	"""
-	# documentaion link
+	# documentation link
 	# https://www.currencyconverterapi.com/docs
 	api_url = settings.CURRCONV_LIVE_RATE_API_URL
 	api_key = settings.CURRCONV_LIVE_RATE_API_KEY

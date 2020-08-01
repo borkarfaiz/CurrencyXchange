@@ -3,15 +3,14 @@ from decimal import Decimal
 from django.db.utils import IntegrityError
 from django.contrib.auth import get_user_model
 
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 from rest_framework.views import APIView
 
 from ...models import Balance, Wallet, OrderCategory
 
-from .helpers import add_funds_to_account, withdraw_funds_from_account, convert_and_transfer_currency
+from wallet.helpers import add_funds_to_account, withdraw_funds_from_account, convert_and_transfer_currency
 from .serializers import BalanceSerializer, FundsSerializer, FundsConversionSerializer, FundsTransferSerializer, \
 	WalletSerializer
 
