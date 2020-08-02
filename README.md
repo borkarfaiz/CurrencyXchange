@@ -90,6 +90,27 @@ workon currency_xchange
 ```bash
 pip install -r requirements.txt
 ```
+### Celery and Redis Setup
+- Redis iinstallation
+```bash
+wget http://download.redis.io/releases/redis-6.0.6.tar.gz
+tar xzf redis-6.0.6.tar.gz
+cd redis-6.0.6
+make
+```
+- Run Redis and celery 
+```bash
+# run each command in different terminal tabs
+
+# path where you have installed redis, will start redis server.
+/home/faiz/Downloads/redis-6.0.6/src/redis-server
+
+# run celery beat
+celery -A CurrencyXchange beat -l info
+
+# run celery worker
+celery -A CurrencyXchange worker -l info
+```
 ### Database Set Generation
 - Download the [currencies.csv](https://drive.google.com/file/d/1XVbYBjhMPL0qA8UizyX-RrUzSa31Jb5r/view?usp=sharing)
 - Run migrations command.

@@ -663,7 +663,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"faizan03\",\n    \"password\": \"faiz@faiz\"\n}",
+							"raw": "{\n    \"username\": \"faizan03\",\n    \"password\": \"faiz@faiz\",\n    \"email\": \"blendgroup1@gmail.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -692,7 +692,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"rajamane\",\n    \"password\": \"ak@raja\"\n}",
+									"raw": "{\n    \"username\": \"rajamane\",\n    \"password\": \"ak@raja\",\n    \"email\": \"rajamane@gmail.com\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -759,7 +759,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"akshayrajmane\",\n    \"password\": \"akshay@raj\"\n}",
+									"raw": "{\n    \"username\": \"akshayrajmane\",\n    \"password\": \"akshay@raj\",\n    \"email\": \"rajmane@gmail.com\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -817,7 +817,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"username\": \"akshayrajmane\"\n}"
+							"body": "{\n    \"username\": \"akshayrajmane\",\n    \"email\": \"rajmane@gmail.com\"\n}"
 						},
 						{
 							"name": "username exists issue",
@@ -962,7 +962,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"username\": \"faizan03\",\n    \"password\": \"faiz@faiz\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1787,7 +1787,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currency\": \"AFN\"\n}",
+							"raw": "{\n    \"currency\": \"USD\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2116,7 +2116,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 5000\n}",
+							"raw": "{\n    \"currency\": \"INR\",\n    \"amount\": 500000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2226,7 +2226,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 2000\n\n}",
+							"raw": "{\n    \"currency\": \"USD\",\n    \"amount\": 50\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2336,7 +2336,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"amount\": 2000\n\n}",
+							"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"amount\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2446,7 +2446,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"from_currency\": \"USD\",\n    \"to_currency\": \"INR\",\n    \"to_username\": \"faiz\",\n    \"amount\": 2000\n}",
+							"raw": "{\n    \"from_currency\": \"INR\",\n    \"to_currency\": \"USD\",\n    \"to_username\": \"faiz\",\n    \"amount\": 22\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3054,9 +3054,24 @@
 					"name": "average currency transfer on weekdays",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "{{local}}/api/analytics/v1/average-currency-transfer-on-weekdays",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"analytics",
+								"v1",
+								"average-currency-transfer-on-weekdays"
+							]
 						}
 					},
 					"response": [
