@@ -15,7 +15,7 @@ class RegistirationTest(APITestCase):
 		Ensure we can create a new account object.
 		"""
 		url = reverse("sign-up")
-		data = {"username": "faiz", "password": "faiz@faiz"}
+		data = {"username": "faiz", "password": "faiz@faiz", "email": "borkar@gmail.com"}
 		response = self.client.post(url, data, format="json")
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 		data.pop("password")

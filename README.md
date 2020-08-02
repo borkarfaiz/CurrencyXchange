@@ -145,7 +145,8 @@ ConversionRate.objects.bulk_create(currencies)
 from currency_converter.tasks import update_conversion_rate
 update_conversion_rate()
 ```
-
+### Email Settings
+- add EMAIL_ID and EMAIL_PASSWORD in environmental variables.
 ### Testing
 - Running Pytest
     - pytest will give you detailed result in well formatted way.

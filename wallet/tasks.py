@@ -20,7 +20,7 @@ UserModel = get_user_model()
 
 
 @periodic_task(
-	run_every=crontab(day_of_month=1),
+	run_every=crontab(0, 0, day_of_month='1'),
 	name="send_monthly_statements_to_user",
 	ignore_result=True
 )
@@ -73,7 +73,7 @@ def send_order_receipt(order_id, round_of_value=4):
 	html.write_pdf(target=target)
 	subject = "Order Receipt #{} | CurrencyXchange".format(order_id)
 	body = "Hi {},\n" \
-		   "We have successfully processed your order, Please find the receipt in the attachment".format(
+		   "We have successfully processed your order, Please find the receipt in the attachment.".format(
 		order.from_user_name.title()
 	)
 	to_email = [order.from_user_email]
@@ -87,3 +87,4 @@ def send_order_receipt(order_id, round_of_value=4):
 	except FileNotFoundError:
 		pass
 	return None
+

@@ -28,6 +28,19 @@ DEBUG = False
 ALLOWED_HOSTS = ["127.0.0.1"]
 
 
+# CACHES
+# ------------------------------------------------------------------------------
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
 # CELERY STUFF
 # ------------------------------------------------------------------------------
 

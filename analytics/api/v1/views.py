@@ -1,13 +1,15 @@
+from django.views.decorators.cache import cache_page
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
-from .serializers import DateSerializer
-
 from analytics.helpers import get_financial_summarization, get_average_currency_transfer_on_weekdays
+from .serializers import DateSerializer
 
 
 @api_view(["GET"])
+@cache_page(60 * 10)
 def financial_summarization(request):
 	request_data = request.query_params
 	date_serializer = DateSerializer(data=request_data)
@@ -19,6 +21,7 @@ def financial_summarization(request):
 
 
 @api_view(["GET"])
+@cache_page(60 * 5)
 def average_currency_transfer_on_weekdays(request):
 	average_currency_transfer_on_weekdays = get_average_currency_transfer_on_weekdays()
 	return Response(status=HTTP_200_OK, data=average_currency_transfer_on_weekdays)

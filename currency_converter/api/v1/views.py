@@ -1,11 +1,12 @@
+from django.views.decorators.cache import cache_page
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 
-from ...models import Currency
-
 from currency_converter.helpers import get_system_conversion_rates, get_live_conversion_rates
 from .serializers import ConversionRateSerializer
+from ...models import Currency
 
 
 @api_view(["GET"])
@@ -17,6 +18,7 @@ def active_currencies(request):
 
 
 @api_view(["GET"])
+@cache_page(60*10)
 def conversion_rate(request):
 	data = request.query_params
 	conversion_rate_serializer = ConversionRateSerializer(data=data)
