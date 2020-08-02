@@ -1,0 +1,107 @@
+<html>
+<head>
+    <style type="text/css">
+        @charset "UTF-8";
+        @import url("https://fonts.googleapis.com/css?family=Pacifico|Source+Sans+Pro:400,700");
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Mono:wght@100&family=Roboto:ital,wght@0,700;1,400&display=swap');
+        @page {
+            margin: 3cm;
+            @top-left {
+                color: #a9a;
+                content: '{{ last_month|date:"M-Y" }}';
+                font-size: 9pt;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            @top-center {
+                color: #1ee494;
+                font-family: Pacifico;
+                content: 'CurrencyXchange';
+                font-size: 20pt;
+            }
+
+            @top-right {
+                color: #a9a;
+                content: 'Monthly Statement';
+                font-size: 9pt;
+                font-family: 'Roboto', sans-serif;
+            }
+            @bottom-right {
+                color: #a9a;
+                content:"pg." counter(page);
+                font-family: 'Roboto', sans-serif;
+                font-size: 9pt;
+            }
+
+        }
+        html aside {
+            display: flex;
+            margin: 2em 0 4em;
+        }
+
+        html aside address {
+            font-style: normal;
+            white-space: pre-line;
+        }
+
+        html aside address#from {
+            color: #a9a;
+            flex: 1;
+        }
+        html table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        html table th {
+            border-bottom: .2mm solid #a9a;
+            color: #a9a;
+            font-size: 10pt;
+            font-weight: 400;
+            padding-bottom: .25cm;
+            text-transform: uppercase;
+        }
+         html table td {
+            padding-top: 7mm;
+            font-size: 10pt;
+        }
+        html table, th, td {
+  border: 0.1px solid black;
+  text-align: center;
+}
+        html table th,
+        html table td {
+
+        }
+    </style>
+</head>
+<body>
+        <aside>
+            <address id="from">
+                Statement Of
+                Name: {{ user.username }}
+                Email: {{ user.email }}
+            </address>
+
+        </aside>
+<table>
+    <thead>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Credit</th>
+    <th>Debit</th>
+    <th>Balance</th>
+    </thead>
+    <tbody>
+    {% for order_data in statement_data %}
+    <tr>
+        <td>{{ order_data.date|date:"d-m-Y" }}</td>
+        <td>{{ order_data.description }}</td>
+        <td>{{ order_data.credit }}</td>
+        <td>{{ order_data.debit }}</td>
+        <td>{{ order_data.balance_amount }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

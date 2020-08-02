@@ -1,5 +1,4 @@
 import os
-from datetime import date
 
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -19,38 +18,25 @@ def send_email_with_attachment(
 	email.send()
 
 
-def send_order_receipt(order):
-	context = {
-		"invoice_number": order.id,
-		"invoice_date": date.today(),
-		"order_time": order.transaction_datetime,
-		"from_user": {
-			"name": order.from_balance.wallet.user.username,
-			"email": order.from_balance.wallet.user.email,
-		},
-		"to_user": {
-			"name": order.to_balance.wallet.user.username,
-			"email": order.from_balance.wallet.user.email,
-		},
-		"order": {
-			"description": order.category,
-			"base_currency": "{}{}".format(order.from_balance.currency.symbol, round(order.transfer_units, 10)),
-			"rate": round(order.system_transfer_rate, 10),
-			"quoted_currency": "{}{}".format(order.to_balance.currency.symbol, round(order.system_transfer_amount, 10))
-		}
-	}
-	html_string = render_to_string('wallet/order_receipt.html', context)
-
-	html = HTML(string=html_string)
-	target = '/tmp/receipt_{}.pdf'.format(order.id)
-	html.write_pdf(target=target)
-	subject = "Order Receipt #{} | CurrencyXchange".format(context.get("invoice_number"))
-	body = "Hi {},\n" \
-		   "We have successfully processed your order, Please find the receipt in the attachment".format(
-		context.get("from_user").get("name").title()
+def send_monthly_statement(user, from_date, to_date):
+	from .helpers import get_statement_data
+	statement_data = get_statement_data(user, from_date, to_date)
+	if not statement_data:
+		return None
+	html_string = render_to_string(
+		'wallet/monthly_statement.html',
+		{"statement_data": statement_data, "last_month": from_date, "user": user}
 	)
-	to_email = [context.get("from_user").get("email")]
-
+	html = HTML(string=html_string)
+	target = '/tmp/{}_monthly_statment.pdf'.format(user.username)
+	html.write_pdf(target=target)
+	month_year_str = from_date.strftime("%b-%Y")
+	subject = "{}-Monthly Statement | CurrencyXchange".format(month_year_str)
+	body = "Hi {}," \
+		   "Please find in the attachment the Monthly statemnt for {}".format(
+		user.username.title(), month_year_str
+	)
+	to_email = [user.email]
 	send_email_with_attachment(
 		subject=subject, body=body, to_email_list=to_email,
 		file_to_attach_path=target

@@ -1,17 +1,19 @@
-from datetime import date
 import json
-
-from .models import ConversionRate
-from django.conf import settings
+from datetime import date
 
 import requests
+from celery.schedules import crontab
+from celery.task import periodic_task
+from django.conf import settings
+
+from .models import ConversionRate
 
 
-# @periodic_task(
-#     run_every = crontab(minute="00", hour="00"),
-#     name="update_portfolio",
-#     ignore_result=True
-# )
+@periodic_task(
+	run_every=crontab(minute=0, hour=0),
+	name="update_conversion_rate",
+	ignore_result=True
+)
 def update_conversion_rate():
 	"""
 	updates the ConversionRate for transferring the money

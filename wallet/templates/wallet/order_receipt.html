@@ -1,7 +1,6 @@
 <html>
 
 <head>
-    <title>My Title</title>
 
     <style type="text/css">
         @charset "UTF-8";
@@ -9,7 +8,12 @@
 
         @page {
             margin: 3cm;
-
+            @top-center {
+                color: #1ee494;
+                font-family: Pacifico;
+                content: 'CurrencyXchange';
+                font-size: 20pt;
+            }
             @bottom-left {
                 color: #1ee494;
                 font-family: Pacifico;
@@ -38,7 +42,7 @@
         html h1 {
             color: #1ee494;
             font-family: Pacifico;
-            font-size: 40pt;
+            font-size: 17pt;
             margin: 0;
         }
 
@@ -125,47 +129,35 @@
         html table td:last-of-type {
             text-align: right;
         }
-
-        html table#total {
-            background: #f6f6f6;
-            border-color: #f6f6f6;
-            border-style: solid;
-            border-width: 2cm 3cm;
-            bottom: 0;
-            font-size: 20pt;
-            margin: 0 -3cm;
-            position: absolute;
-            width: 18cm;
-        }
     </style>
 </head>
 
 <body>
 
     <body>
-        <h1>Receipt</h1>
+        <h1>Order Receipt</h1>
 
         <aside>
             <address id="from">
                 From:-
-                {{ from_user.name|title }}
-                borkarfaiz@gmail.com
+                {{ order.from_user_name|title }}
+                {{ order.from_user_email }}
             </address>
 
             <address id="to">
                 To:-
-                {{ to_user.name|title }}
-                faiz.b@gmail.com
+                {{ order.to_user_name|title }}
+                {{ order.to_user_email }}
             </address>
         </aside>
 
         <dl id="informations">
             <dt>Invoice number</dt>
-            <dd>{{ invoice_number }}</dd>
+            <dd>{{ order.invoice_number }}</dd>
             <dt>Invoice Date</dt>
-            <dd>{{ invoice_date }}</dd>
+            <dd>{{ order.invoice_date }}</dd>
             <dt>Order Time</dt>
-            <dd>{{ order_time }}</dd>
+            <dd>{{ order.order_time }}</dd>
         </dl>
 
         <table>
@@ -178,9 +170,9 @@
             <tbody>
                 <tr>
                     <td>{{ order.description }}</td>
-                    <td>{{ order.base_currency }}</td>
+                    <td>{{ order.base_amount }}</td>
                     <td>{{ order.rate }}</td>
-                    <td>{{ order.quoted_currency }}</td>
+                    <td>{{ order.quoted_amount }}</td>
                 </tr>
             </tbody>
         </table>

@@ -1,15 +1,19 @@
 from datetime import datetime
 from decimal import Decimal
 
-from django.db.utils import IntegrityError
 from django.db import transaction
+from django.db.models.fields import CharField
+from django.db.models.functions import Concat, TruncDate
+from django.db.models.expressions import F, Case, When, Value as V, Func
+from django.db.models.query_utils import Q
+from django.db.utils import IntegrityError
 
 from currency_converter.helpers import get_system_conversion_rates, get_live_conversion_rates
 from currency_converter.models import Currency
 
 from .exceptions import InsufficientBalance
 from .models import Balance, BalanceHistory, Wallet, Order, OrderCategory, OrderStatus
-from .utils import send_order_receipt
+from .tasks import send_order_receipt
 
 
 def create_order(
@@ -230,7 +234,7 @@ def convert_and_transfer_currency(
 			BalanceHistory.objects.create(
 				order=initiated_order, wallet=to_wallet, balance=to_balance.balance, currency=to_currency,
 			)
-			send_order_receipt(initiated_order)
+			send_order_receipt.delay(initiated_order.id)
 			return initiated_order
 	except InsufficientBalance as e:
 		initiated_order.status = OrderStatus.FAILED
@@ -241,3 +245,90 @@ def convert_and_transfer_currency(
 		initiated_order.status = OrderStatus.FAILED
 		initiated_order.save()
 		raise transaction.TransactionManagementError("{} Failed".format(OrderCategory.WITHDRAW_FUNDS))
+
+
+def get_statement_data(user, from_date, to_date, round_of_value=2):
+	statement_data = BalanceHistory.objects.filter(
+		wallet__user=user, order__transaction_datetime__date__range=(from_date, to_date),
+	).annotate(
+		date=TruncDate("order__transaction_datetime"),
+		quoted_amount=Func(
+			F('order__system_transfer_amount'),
+			V(round_of_value),
+			function="ROUND"
+		),
+		base_amount=Func(
+			F('order__transfer_units'),
+			V(round_of_value),
+			function="ROUND"
+		),
+		description=Case(
+			When(
+				Q(order__category=OrderCategory.ADD_FUNDS),
+				then=V("Fund Added")
+			),
+			When(
+				Q(order__category=OrderCategory.WITHDRAW_FUNDS),
+				then=V("Fund Withdrawn")
+			),
+			When(
+				Q(order__from_currency=F("currency")) & Q(order__category=OrderCategory.SELF_FUND_TRANSFER),
+				then=Concat(
+					V("Fund Conversion debit "),
+					"order__to_balance__currency__symbol", "quoted_amount"
+				)
+			),
+			When(
+				Q(order__to_currency=F("currency")) & Q(order__category=OrderCategory.SELF_FUND_TRANSFER),
+				then=Concat(
+					V("Fund Conversion credit "),
+					"order__from_balance__currency__symbol", "base_amount"
+				)
+			),
+			When(
+				Q(order__from_balance__wallet__user=user) & Q(order__category=OrderCategory.FUND_TRANSFER),
+				then=Concat(
+					V("Fund Transfer "),
+					"order__to_balance__wallet__user__username",
+					V("/"),
+					"order__to_balance__currency__symbol", "quoted_amount"
+				)
+			),
+			When(
+				Q(order__to_balance__wallet__user=user) & Q(order__category=OrderCategory.FUND_TRANSFER),
+				then=Concat(
+					V("Fund Received "),
+					"order__from_balance__wallet__user__username",
+					V("/"),
+					"order__from_balance__currency__symbol", "base_amount"
+				)
+			),
+			output_field=CharField(),
+		),
+		credit=Case(
+			When(
+				Q(order__to_currency=F("currency")) & ~Q(order__category=OrderCategory.WITHDRAW_FUNDS),
+				then=Concat("order__to_balance__currency__symbol", "quoted_amount")
+			),
+			output_field=CharField(),
+			default=V(""),
+		),
+		debit=Case(
+			When(
+				Q(order__from_currency=F("currency")) & ~Q(order__category=OrderCategory.ADD_FUNDS),
+				then=Concat("order__from_balance__currency__symbol", "base_amount"),
+			),
+			output_field=CharField(),
+			default=V(""),
+		),
+		rounded_balance=Func(
+			F('balance'),
+			V(round_of_value),
+			function="ROUND"
+		),
+		balance_amount=Concat("currency__symbol", "rounded_balance", output_field=CharField())
+	).values(
+		"date", "description", "credit", "debit", "balance_amount"
+	).order_by('id')
+
+	return statement_data
