@@ -33,7 +33,7 @@ http3==0.6.7
 hyperframe==5.2.0
 idna==2.10
 iniconfig==1.0.0
-ipython==7.16.1
+ipython==7.16.3
 ipython-genutils==0.2.0
 jedi==0.17.2
 jsonfield==2.1.1
