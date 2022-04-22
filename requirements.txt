@@ -55,7 +55,7 @@ py==1.9.0
 pycparser==2.20
 Pygments==2.6.1
 pyparsing==2.4.7
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.5
 pytest==6.0.0
 pytest-django==3.9.0
